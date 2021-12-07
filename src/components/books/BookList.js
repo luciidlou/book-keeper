@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { Button, Table } from "reactstrap"
 import ShelvesRepository from "../repositories/ShelvesRepository"
 import UserBooksRepository from "../repositories/UserBooksRepository"
@@ -6,6 +7,7 @@ import "./BookList.css"
 const BookList = () => {
     const [userBooks, setUserBooks] = useState([])
     const [shelves, setShelves] = useState([])
+    const history = useHistory()
     const syncUserBooks = () => {
         UserBooksRepository.getAll().then(setUserBooks)
     }
@@ -59,7 +61,7 @@ const BookList = () => {
                                     {userBook.dateRead ? userBook.dateRead : "Not read"}
                                 </td>
                                 <td>
-                                    <Button>Add note</Button>
+                                    <Button onClick={() => {history.push(`/mybooks/${userBook.book?.id}/addnote`)}}>Add note</Button>
                                 </td>
                                 <td>
                                     <Button onClick={() => {

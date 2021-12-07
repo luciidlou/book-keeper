@@ -1,17 +1,13 @@
 .container {
     display: flex;
+    justify-content: space-between;
     margin: 0;
 }
 .aside {
-    flex: 2;
     border: 1px solid black;
-    margin-right: 15px;
 }
 .aside__book {
-    margin: 15px 0 40px 0;
 }
 .feed {
-    flex: 5;
     border: 1px solid black;
-    margin-left: 15px;
 }
