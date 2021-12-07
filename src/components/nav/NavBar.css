@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+.header__title {
+    margin: 5px 15px;
+}
+.header__welcome {
+    margin: 20px 15px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
