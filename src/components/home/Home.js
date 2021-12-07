@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom"
+import { Button } from "reactstrap"
 import "./Home.css"
 
 const Home = () => {
@@ -7,7 +8,7 @@ const Home = () => {
     return (
         <main className="container">
             <aside className="aside">
-                <button className="new-book-btn" onClick={() => {history.push("/mybooks/register")}}>Add new book</button>
+                <Button className="new-book-btn" onClick={() => {history.push("/mybooks/register")}}>Add new book</Button>
                 <div className="aside__book">
                     Display current book
                 </div>

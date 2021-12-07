@@ -2,8 +2,8 @@ import Settings from "./Settings"
 
 const BooksRepositiory = {
     async getAll() {
-        return fetch(`${Settings.remoteURL}/books`)
-            .then(res => res.json())
+        const res = await fetch(`${Settings.remoteURL}/books`)
+        return await res.json()
     },
     async add(newBook) {
         const fetchOptions = {
@@ -13,8 +13,8 @@ const BooksRepositiory = {
             },
             body: JSON.stringify(newBook)
         }
-        return fetch(`${Settings.remoteURL}/books`, fetchOptions)
-            .then(res => res.json())
+        const res = await fetch(`${Settings.remoteURL}/books`, fetchOptions)
+            return await res.json() 
     }
 }
 export default BooksRepositiory

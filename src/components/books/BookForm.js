@@ -11,6 +11,7 @@ const BookForm = () => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const history = useHistory()
+    const [shelves, setShelves] = useState([])
 
     const [book, updateBook] = useState({
         title: "",
@@ -24,7 +25,6 @@ const BookForm = () => {
         dateAdded: null,
         dateRead: ""
     })
-    const [shelves, setShelves] = useState([])
 
     useEffect(() => {
         ShelvesRepository.getAll().then(setShelves)
@@ -42,6 +42,7 @@ const BookForm = () => {
                     : UserBooksRepository.add(userBook)
             })
             .then(() => { history.push("/mybooks") })
+            .then(() => { UserBooksRepository.getAll() })
     }
 
     return (
@@ -101,7 +102,7 @@ const BookForm = () => {
                         userBookCopy.shelfId = parseInt(event.target.value)
                         updateUserBook(userBookCopy)
                     }}>
-                    <option value="0">Choose a shelf...</option>
+                    <option hidden value="">Choose a shelf...</option>
                     {
                         shelves.map((s) => {
                             return <option key={s.id} value={s.id}>{s.name}</option>

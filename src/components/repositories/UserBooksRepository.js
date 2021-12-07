@@ -2,8 +2,8 @@ import Settings from "./Settings"
 
 const UserBooksRepository = {
     async getAll() {
-        return fetch(`${Settings.remoteURL}/userBooks?_expand=book`)
-            .then(res => res.json())
+        const res = await fetch(`${Settings.remoteURL}/userBooks?_expand=book&_expand=shelf`)
+            return await res.json()
     },
     async add(newUserBook) {
         const fetchOptions = {
@@ -13,8 +13,11 @@ const UserBooksRepository = {
             },
             body: JSON.stringify(newUserBook)
         }
-        return fetch(`${Settings.remoteURL}/userBooks`, fetchOptions)
-            .then(res => res.json())
+        const res = await fetch(`${Settings.remoteURL}/userBooks`, fetchOptions)
+            return await res.json()
+    },
+    async delete(id) {
+        return await fetch(`${Settings.remoteURL}/userBooks/${id}`, { method: "DELETE" })
     }
 }
 export default UserBooksRepository
