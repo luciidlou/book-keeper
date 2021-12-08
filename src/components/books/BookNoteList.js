@@ -34,6 +34,7 @@ const BookNoteList = () => {
             </div>
             <div className="notes-container__title">{filteredNotes.length > 0 ? `Notes for "${book?.title}" by ${book?.author}` : `You don't have any notes for "${book?.title}"`}</div>
             <div className="notes-container">
+                
                 {
                     filteredNotes.map(note => {
                         return <BookNote

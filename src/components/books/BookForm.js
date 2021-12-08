@@ -21,14 +21,16 @@ const BookForm = () => {
     const [userBook, updateUserBook] = useState({
         bookId: 0,
         userId: currentUser.id,
-        shelfId: null,
-        dateAdded: null,
+        shelfId: 0,
+        dateAdded: "",
         dateRead: ""
     })
 
     useEffect(() => {
         ShelvesRepository.getAll().then(setShelves)
     }, [])
+
+    const hasBeenRead = userBook.shelfId === 3
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -47,10 +49,11 @@ const BookForm = () => {
 
     return (
         <Form className="form" onSubmit={handleSubmit}>
+            <h2 className="form__header">Add a new book to your library!</h2>
             <FormGroup className="form__field">
                 <Label for="title" className="form__label">Title: </Label>
                 <Input
-                    className="form__control"
+                    className="form__control title"
                     type="text"
                     required autoFocus
                     placeholder="Title of book..."
@@ -63,7 +66,7 @@ const BookForm = () => {
             <FormGroup className="form__field">
                 <Label for="author" className="form__label">Author: </Label>
                 <Input
-                    className="form__control"
+                    className="form__control author"
                     type="text"
                     required
                     placeholder="Name of author..."
@@ -112,13 +115,14 @@ const BookForm = () => {
             </FormGroup>
             <FormGroup className="form__field">
                 {
-                    userBook.shelfId === 3
+                    hasBeenRead
                         ?
                         <>
                             <Label for="dateRead" className="form__label">Date read: </Label>
                             <Input
                                 className="form__control"
                                 type="date"
+                                id="date"
                                 onChange={(event) => {
                                     const userBookCopy = { ...userBook }
                                     userBookCopy.dateRead = event.target.value

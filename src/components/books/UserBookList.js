@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Table } from "reactstrap"
 import useSimpleAuth from "../hooks/useSimpleAuth"
-// import ShelvesRepository from "../repositories/ShelvesRepository"
 import UserBooksRepository from "../repositories/UserBooksRepository"
 import UserBook from "./UserBook"
 import "./UserBookList.css"
@@ -10,7 +9,6 @@ const BookList = () => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const [userBooks, setUserBooks] = useState([])
-    // const [shelves, setShelves] = useState([])
     const history = useHistory()
 
     const syncUserBooks = () => {
@@ -20,10 +18,6 @@ const BookList = () => {
     useEffect(() => {
         syncUserBooks()
     }, [])
-
-    // useEffect(() => {
-    //     ShelvesRepository.getAll().then(setShelves)
-    // }, [])
 
     return (
         <>
@@ -49,7 +43,7 @@ const BookList = () => {
                                     Date added
                                 </th>
                                 <th>
-                                    Date read
+                                    Last date read
                                 </th>
                             </tr>
                         </thead>
@@ -62,12 +56,13 @@ const BookList = () => {
                                             title={userBook.book?.title}
                                             author={userBook.book?.author}
                                             publicationYear={userBook.book?.publicationYear}
-                                            shelf={userBook.shelf?.name}
+                                            shelf={userBook.shelf}
                                             dateAdded={userBook.dateAdded}
                                             dateRead={userBook.dateRead}
                                             bookId={userBook.bookId}
                                             userId={currentUser.id}
                                             userBookId={userBook.id}
+                                            userBook={userBook}
                                             syncUserBooks={syncUserBooks} />
                                     )
                                 })
