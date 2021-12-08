@@ -1,3 +1,6 @@
 .primary-btn {
     margin-right: 15px;
 }
+#pageNum {
+    width: 6em;
+}

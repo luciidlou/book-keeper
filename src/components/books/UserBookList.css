@@ -1,0 +1,15 @@
+Table {
+    margin: 0 10px;
+}
+thead {
+    border-bottom: 1px solid black;
+}
+#select {
+    width: min-content;
+}
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 1em 0 0;
+}
