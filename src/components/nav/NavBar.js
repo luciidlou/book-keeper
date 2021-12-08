@@ -1,13 +1,15 @@
 import { Nav, NavItem, NavLink } from "reactstrap"
 import useSimpleAuth from "../hooks/useSimpleAuth"
 import "./NavBar.css"
+import worldBook from "../../images/world-book.png"
+
 export const NavBar = () => {
     const { isAuthenticated, logout, getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     return (
         <>
             <div className="header">
-                <h1 className="header__title">Bookkeeper 📚</h1>
+                <h1 className="header__title">Bookkeeper <img src={worldBook} alt="a stack of books" /> </h1>
                 <h3 className="header__welcome">Welcome, {currentUser.firstName}</h3>
             </div>
             <Nav className="navbar">

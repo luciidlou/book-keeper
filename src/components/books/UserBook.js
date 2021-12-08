@@ -1,14 +1,20 @@
+import moment from "moment"
 import { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { Button, Input } from "reactstrap"
 import BookNotesRepository from "../repositories/BookNotesRepository"
+import PostsRepository from "../repositories/PostsRepository"
 import ShelvesRepository from "../repositories/ShelvesRepository"
 import UserBooksRepository from "../repositories/UserBooksRepository"
 
 const UserBook = (props) => {
     const history = useHistory()
     const [shelves, setShelves] = useState([])
-
+    const [post] = useState({
+        userBookId: 0,
+        shelfId: 0,
+        dateCreated: 0
+    })
     const syncShelves = () => {
         ShelvesRepository.getAll().then(setShelves)
     }
@@ -24,6 +30,11 @@ const UserBook = (props) => {
 
     const handleShelfChange = (event) => {
         const newShelf = parseInt(event.target.value)
+        const currentDate = new Date()
+
+        post.shelfId = newShelf
+        post.dateCreated = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a')
+
         const editedUserBook = {
             id: props.userBookId,
             bookId: props.bookId,
@@ -32,7 +43,10 @@ const UserBook = (props) => {
             dateAdded: props.dateAdded,
             dateRead: props.dateRead
         }
+
         UserBooksRepository.updateShelf(editedUserBook)
+            .then(userBookResponse => { post.userBookId = userBookResponse.id })
+            .then(() => PostsRepository.add(post))
             .then(props.syncUserBooks)
             .then(() => syncShelves())
     }

@@ -2,7 +2,7 @@ import Settings from "./Settings"
 
 const ShelvesRepository = {
     async getAll() {
-        const res = await fetch(`${Settings.remoteURL}/shelves`)
+        const res = await fetch(`${Settings.remoteURL}/shelves?_embed=userBooks`)
             return await res.json()
     }
 

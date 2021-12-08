@@ -1,8 +1,10 @@
+import moment from "moment"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Form, FormGroup, Input, Label } from "reactstrap"
 import useSimpleAuth from "../hooks/useSimpleAuth"
 import BooksRepositiory from "../repositories/BooksRepositiory"
+import PostsRepository from "../repositories/PostsRepository"
 import ShelvesRepository from "../repositories/ShelvesRepository"
 import UserBooksRepository from "../repositories/UserBooksRepository"
 import "./BookForm.css"
@@ -25,6 +27,11 @@ const BookForm = () => {
         dateAdded: "",
         dateRead: ""
     })
+    const [post, updatePost] = useState({
+        userBookId: 0,
+        shelfId: 0,
+        dateCreated: ""
+    })
 
     useEffect(() => {
         ShelvesRepository.getAll().then(setShelves)
@@ -35,13 +42,18 @@ const BookForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         BooksRepositiory.add(book)
-            .then((data) => {
+            .then((bookResponse) => {
                 const currentDate = new Date()
                 userBook.dateAdded = currentDate.toLocaleDateString("en-US")
-                userBook.bookId = data.id
+                post.dateCreated = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a')
+                userBook.bookId = bookResponse.id
                 userBook.shelfId === 3
                     ? userBook.dateRead = currentDate.toLocaleDateString("en-US") && UserBooksRepository.add(userBook)
+                        .then((userBookResponse) => post.userBookId = userBookResponse.id)
+                        .then(() => PostsRepository.add(post))
                     : UserBooksRepository.add(userBook)
+                        .then((userBookResponse) => post.userBookId = userBookResponse.id)
+                        .then(() => PostsRepository.add(post))
             })
             .then(() => { history.push("/mybooks") })
             .then(() => { UserBooksRepository.getAll() })
@@ -104,6 +116,10 @@ const BookForm = () => {
                         const userBookCopy = { ...userBook }
                         userBookCopy.shelfId = parseInt(event.target.value)
                         updateUserBook(userBookCopy)
+
+                        const postCopy = { ...post }
+                        postCopy.shelfId = parseInt(event.target.value)
+                        updatePost(postCopy)
                     }}>
                     <option hidden value="">Choose a shelf...</option>
                     {
