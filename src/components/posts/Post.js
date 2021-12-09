@@ -15,7 +15,7 @@ const Post = (props) => {
             return "is currently reading"
         }
         else {
-            return "just finished reading"
+            return "finished reading"
         }
     }
     const displayDynamicText = handleDynamicText()

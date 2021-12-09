@@ -1,12 +1,13 @@
 import { Route } from "react-router-dom"
+import FollowersList from "./social/FollowersList"
 
-const FriendRoutes = () => {
+const SocialRoutes = () => {
     return (
         <>
-            <Route exact path="/friends">
-
+            <Route exact path="/social">
+                <FollowersList />
             </Route>
         </>
     )
 }
-export default FriendRoutes
+export default SocialRoutes

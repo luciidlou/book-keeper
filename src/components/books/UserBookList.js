@@ -19,13 +19,15 @@ const BookList = () => {
         syncUserBooks()
     }, [])
 
+    const currentUsersBooks = userBooks.filter(ub => ub.userId === currentUser.id)
+
     return (
         <>
             <div className="btn-container">
                 <Button className="new-book-btn" onClick={() => { history.push("/mybooks/addbook") }}>Add new book</Button>
             </div>
             {
-                userBooks.length
+                currentUsersBooks?.length
                     ?
                     <Table borderless>
                         <thead>
@@ -49,7 +51,7 @@ const BookList = () => {
                         </thead>
                         <tbody>
                             {
-                                userBooks.map((userBook) => {
+                                currentUsersBooks?.map((userBook) => {
                                     return (
                                         <UserBook
                                             key={userBook.id}

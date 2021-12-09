@@ -66,20 +66,23 @@ const Home = () => {
     const currentUserBooks = userBooks.filter((userBook) => userBook.userId === currentUser.id && userBook.shelfId === 2)
 
     return (
-        <main className="container">
+        <div className="home-container">
             <aside className="aside">
                 <Button className="new-book-btn" onClick={() => { history.push("/mybooks/addbook") }}>Add new book</Button>
                 <div className="aside__book">
                     <h5><img id="asideImg" src={bookmark} alt="a bookmarked book" /> Currently reading...</h5>
                     {
+                        currentUserBooks.length
+                            ?
                         currentUserBooks.map(userBook => {
                             return (
                                 <div key={userBook.id} className="currentRead">
-                                    <div className="currentRead__title">{userBook.book?.title}</div>
+                                    <div className="currentRead__title">{userBook.book?.title} ({userBook.book?.publicationYear})</div>
                                     <div className="currentRead__author">By {userBook.book?.author}</div>
                                 </div>
                             )
                         })
+                        : "You are not currently reading anything!"
                     }
                 </div>
                 <div className="aside__shelves">
@@ -104,7 +107,7 @@ const Home = () => {
                     <PostList />
                 </div>
             </section>
-        </main>
+        </div>
     )
 }
 export default Home

@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+.container-header {
+    text-align: center;
+}
+.add-friends {
+    border-left: 1px solid black;
+    margin: 1em 1em 0 0;
+    text-align: center;
+}
+.add-friends__list {
+    margin-bottom: 2em;
+}

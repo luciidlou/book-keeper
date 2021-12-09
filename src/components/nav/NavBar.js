@@ -20,7 +20,7 @@ export const NavBar = () => {
                     <NavLink className="navbar__link" href="/mybooks">My Books</NavLink>
                 </NavItem>
                 <NavItem active className="navbar__item">
-                    <NavLink className="navbar__link" href="/friends">Friends</NavLink>
+                    <NavLink className="navbar__link" href="/social">Social</NavLink>
                 </NavItem>
                 <NavItem active className="navbar__logout">
                     {

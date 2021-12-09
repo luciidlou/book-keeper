@@ -1,0 +1,27 @@
+.header-friends {
+    padding: 0 0 20px 15px;
+}
+.friends-container {
+    display: flex;
+}
+.friends-container__table {
+    flex: 3;
+}
+.add-friends {
+    flex: 1;
+}
+Table {
+    margin: 0 10px;
+}
+thead {
+    border-bottom: 1px solid black;
+}
+#select {
+    width: min-content;
+}
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0 1em 0 0;
+}
