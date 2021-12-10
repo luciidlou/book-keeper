@@ -9,11 +9,11 @@ const FollowsRepository = {
             },
             body: JSON.stringify(follow)
         }
-        const res = await fetch(`${Settings.remoteURL}/follows?_expand=user&_expand=follow`, fetchOptions)
+        const res = await fetch(`${Settings.remoteURL}/follows?_expand=user`, fetchOptions)
         return await res.json()
     },
     async getAll() {
-        const res = await fetch(`${Settings.remoteURL}/follows?_expand=user&_expand=follow`)
+        const res = await fetch(`${Settings.remoteURL}/follows?_expand=user`)
         return await res.json()
     },
     async delete(id) {

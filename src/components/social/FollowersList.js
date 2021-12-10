@@ -32,16 +32,16 @@ const FollowersList = () => {
     }, [])
 
     const currentUsersFollows = follows.filter(follow => follow.userId === currentUser.id)
-    const findFollowedUser = (followId) => {
+    const findFollowedUser = (followedUserId) => {
         for (const user of users) {
-            if (user.id === followId) {
+            if (user.id === followedUserId) {
                 return user
             }
         }
     }
-    const getUserBooksByFollowId = (followId) => {
+    const getUserBooksByFollowedUserId = (followedUserId) => {
         for (const user of users) {
-            if (user.id === followId) {
+            if (user.id === followedUserId) {
                 return user.userBooks
             }
         }
@@ -73,9 +73,9 @@ const FollowersList = () => {
                     <tbody>
                         {
                             currentUsersFollows.map(follow => {
-                                const followedUser = findFollowedUser(follow.followId)
+                                const followedUser = findFollowedUser(follow.followedUserId)
 
-                                const followedUserBooks = getUserBooksByFollowId(follow.followId)
+                                const followedUserBooks = getUserBooksByFollowedUserId(follow.followedUserId)
                                 const getFollowedsCurrentRead = () => {
                                     if (followedUserBooks?.length) {
                                         for (const userBook of followedUserBooks) {

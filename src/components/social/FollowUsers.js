@@ -31,7 +31,7 @@ const FollowUsers = (props) => {
     const isolateFollowIds = () => {
         const followIdArr = []
         for (const follow of follows) {
-            followIdArr.push(follow.followId)
+            followIdArr.push(follow.followedUserId)
         }
         return followIdArr
     }
@@ -47,7 +47,7 @@ const FollowUsers = (props) => {
                             const currentDate = new Date()
                             const newFollow = {
                                 userId: currentUser.id,
-                                followId: user.id,
+                                followedUserId: user.id,
                                 dateFollowed: moment(currentDate).format('MMMM Do YYYY')
                             }
                             FollowsRepository.add(newFollow)
