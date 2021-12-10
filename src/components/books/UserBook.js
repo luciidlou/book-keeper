@@ -148,7 +148,7 @@ const UserBook = (props) => {
                 {displayDateRead}
             </td>
             <td>
-                <Button onClick={() => { history.push(`/mybooks/${props.bookId}`) }}>Notes</Button>
+                <Button onClick={() => { history.push(`/mybooks/${props.bookId}`) }}>Notes ({props.userBook?.bookNotes.length})</Button>
             </td>
             <td>
                 <Button onClick={handleRemoveBook}>Delete</Button>

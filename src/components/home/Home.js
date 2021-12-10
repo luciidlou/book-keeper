@@ -24,15 +24,15 @@ const Home = () => {
     }, [])
 
     const getWantToReadCount = () => {
-        const count = []
+        const wantToReadCount = []
         for (const shelf of shelves) {
             for (const userBook of shelf.userBooks) {
                 if (shelf.id === 1 && userBook.userId === currentUser.id) {
-                    count.push(userBook)
+                    wantToReadCount.push(userBook)
                 }
             }
         }
-        return count
+        return wantToReadCount
     }
     const wantToReadCount = getWantToReadCount()
 
@@ -74,15 +74,21 @@ const Home = () => {
                     {
                         currentUserBooks.length
                             ?
-                        currentUserBooks.map(userBook => {
-                            return (
-                                <div key={userBook.id} className="currentRead">
-                                    <div className="currentRead__title">{userBook.book?.title} ({userBook.book?.publicationYear})</div>
-                                    <div className="currentRead__author">By {userBook.book?.author}</div>
-                                </div>
-                            )
-                        })
-                        : "You are not currently reading anything!"
+                            currentUserBooks.map(userBook => {
+                                return (
+                                    <div key={userBook.id} className="currentRead">
+                                        <div className="currentRead__title">{userBook.book?.title} ({userBook.book?.publicationYear})</div>
+                                        <div className="currentRead__author">By {userBook.book?.author}</div>
+                                        {
+                                            currentUserBooks.length > 1
+                                                ? <div className="breakPoint">---------------------------</div>
+                                                : ""
+                                        }
+
+                                    </div>
+                                )
+                            })
+                            : "You are not currently reading anything!"
                     }
                 </div>
                 <div className="aside__shelves">
@@ -102,8 +108,8 @@ const Home = () => {
                 </div>
             </aside>
             <section className="posts">
-                    <h2 className="updates-header">Updates</h2>
-                    <PostList />
+                <h2 className="updates-header">Updates</h2>
+                <PostList />
             </section>
         </div>
     )

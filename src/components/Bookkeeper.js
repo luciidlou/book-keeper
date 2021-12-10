@@ -4,6 +4,7 @@ import Login from "./auth/Login"
 import { Register } from "./auth/Register"
 import useSimpleAuth from "./hooks/useSimpleAuth"
 import { NavBar } from "./nav/NavBar"
+import "./Bookkeeper.css"
 
 export const Bookkeeper = () => {
     const { isAuthenticated } = useSimpleAuth()

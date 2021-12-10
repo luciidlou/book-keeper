@@ -1,5 +1,10 @@
 import Settings from "./Settings"
 
+/* 
+We can use the async keyword before a function name to wrap the return value of this function in a Promise. We can 
+use the await keyword (in an async function) to wait for a promise to be resolved or rejected before continuing code execution in this block. 
+*/
+
 const FollowsRepository = {
     async add(follow) {
         const fetchOptions = {

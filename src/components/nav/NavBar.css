@@ -1,11 +1,19 @@
-.header {
+.navContainer {
+    margin-top: 10px;
+}
+.nav-header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
 }
-.header__title {
-    margin: 5px 15px;
+#navImg {
+    width: 60px;
+    height: 60px;
 }
-.header__welcome {
+.nav-headerLeft {
+    margin: 0 15px;
+}
+.nav-headerRight {
     margin: 20px 15px;
 }
 .navbar {

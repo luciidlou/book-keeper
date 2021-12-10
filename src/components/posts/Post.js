@@ -46,13 +46,13 @@ const Post = (props) => {
     return (
         isFollowed || isCurrentUsersPost
             ?
-            <Card className="noteCard">
-                <CardBody className="noteCard__body">
-                    <CardTitle className="noteCard__title">
+            <Card className="postCard">
+                <CardBody className="postCard__body">
+                    <CardTitle className="postCard__title">
                         <span className="user-name">{props.firstName} {props.lastName}</span>
                     </CardTitle>
                     <CardSubtitle
-                        className="mb-2 text-muted noteCard__date"
+                        className="mb-2 text-muted postCard__date"
                         tag="h6"
                     >
                         {displayDynamicText} <span style={{ fontWeight: "bold" }}>{props.title}</span> by {props.author}
