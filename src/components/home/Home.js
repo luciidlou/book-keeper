@@ -4,7 +4,7 @@ import { Button } from "reactstrap"
 import useSimpleAuth from "../hooks/useSimpleAuth"
 import PostList from "../posts/PostList"
 import UserBooksRepository from "../repositories/UserBooksRepository"
-import "./Home2.css"
+import "./Home.css"
 import bookmark from "../../images/bookmark1.png"
 import ShelvesRepository from "../repositories/ShelvesRepository"
 
