@@ -15,6 +15,9 @@ const FollowsRepository = {
     async getAll() {
         const res = await fetch(`${Settings.remoteURL}/follows?_expand=user&_expand=follow`)
         return await res.json()
+    },
+    async delete(id) {
+        return await fetch(`${Settings.remoteURL}/follows/${id}`, { method: "DELETE" })
     }
 }
 export default FollowsRepository

@@ -13,7 +13,7 @@ const PostsRepository = {
         return await res.json()
     },
     async getAll() {
-        const res = await fetch(`${Settings.remoteURL}/posts?_expand=userBook&_expand=shelf&_sort=dateCreated&_order=desc`)
+        const res = await fetch(`${Settings.remoteURL}/posts?_expand=user&_expand=shelf&_sort=dateCreated&_order=desc`)
         return await res.json()
     },
     async delete(id) {

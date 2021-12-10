@@ -22,11 +22,11 @@ const FollowUsers = (props) => {
 
     useEffect(() => {
         syncUsers()
-    }, [])
+    }, [props.syncFollowList])
 
     useEffect(() => {
         syncFollows()
-    }, [])
+    }, [props.syncFollowList])
 
     const isolateFollowIds = () => {
         const followIdArr = []
@@ -51,9 +51,9 @@ const FollowUsers = (props) => {
                                 dateFollowed: moment(currentDate).format('MMMM Do YYYY')
                             }
                             FollowsRepository.add(newFollow)
-                                .then(isolateFollowIds)
-                                .then(syncUsers)
-                                .then(syncFollows)
+                                // .then(isolateFollowIds)
+                                // .then(syncUsers)
+                                // .then(syncFollows)
                                 .then(props.syncFollowList)
                         }
                         if (user.id !== currentUser.id && !arrOfFollowIds.includes(user.id)) {

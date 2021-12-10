@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react"
-import useSimpleAuth from "../hooks/useSimpleAuth"
 import BooksRepositiory from "../repositories/BooksRepositiory"
 import PostsRepository from "../repositories/PostsRepository"
+import UsersRepository from "../repositories/UsersRepository"
 import Post from "./Post"
 
 const PostList = () => {
-    const { getCurrentUser } = useSimpleAuth()
-    const currentUser = getCurrentUser()
     const [posts, setPosts] = useState([])
     const [books, setBooks] = useState([])
+    const [users, setUsers] = useState([])
 
     const syncPosts = () => {
         PostsRepository.getAll().then(setPosts)
@@ -22,21 +21,25 @@ const PostList = () => {
         BooksRepositiory.getAll().then(setBooks)
     }, [])
 
+    useEffect(() => {
+        UsersRepository.getAll().then(setUsers)
+    }, [])
+
 
     return (
         posts.map(post => {
-            const foundBook = books.find(b => b.id === post.userBook?.bookId)
-
+            const foundBook = books.find(b => b.id === post.bookId)
+            const foundUser = users.find(u => u.id === post.userId)
             return <Post
                 key={post.id}
                 postId={post.id}
-                shelfId={post.shelfId}
-                userId={currentUser.id}
-                dateCreated={post.dateCreated}
-                firstName={currentUser.firstName}
-                lastName={currentUser.lastName}
+                userId={foundUser?.id}
+                firstName={foundUser?.firstName}
+                lastName={foundUser?.lastName}
                 title={foundBook?.title}
                 author={foundBook?.author}
+                shelfId={post.shelfId}
+                dateCreated={post.dateCreated}
                 syncPosts={syncPosts}
             />
         })

@@ -32,7 +32,6 @@ const FollowersList = () => {
     }, [])
 
     const currentUsersFollows = follows.filter(follow => follow.userId === currentUser.id)
-
     const findFollowedUser = (followId) => {
         for (const user of users) {
             if (user.id === followId) {
@@ -91,23 +90,39 @@ const FollowersList = () => {
                                 }
 
                                 const followedsCurrentRead = getFollowedsCurrentRead()
-                                const foundBook = books.find(b => b.id === followedsCurrentRead.bookId)
+
+                                const findBook = () => {
+                                    if (followedsCurrentRead) {
+                                        for (const book of books) {
+                                            if (book.id === followedsCurrentRead.bookId) {
+                                                return book
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        return ""
+                                    }
+                                }
+                                const foundBook = findBook()
+
 
                                 return <Follower key={follow.id}
+                                    followId={follow.id}
                                     firstName={followedUser?.firstName}
                                     lastName={followedUser?.lastName}
-                                    currentTitle={foundBook ? foundBook?.title : "Not currently reading"}
-                                    currentAuthor={foundBook ? foundBook?.author : ""}
+                                    currentTitle={foundBook?.title}
+                                    currentAuthor={foundBook?.author}
                                     totalBookCount={followedUserBooks ? followedUserBooks.length : "0"}
                                     dateFollowed={follow.dateFollowed}
+                                    syncFollowList={syncFollowList}
                                 />
                             })
                         }
                     </tbody>
                 </Table>
-                <FollowUsers 
-                className="add-friends" 
-                syncFollowList={syncFollowList}
+                <FollowUsers
+                    className="add-friends"
+                    syncFollowList={syncFollowList}
                 />
             </main>
 

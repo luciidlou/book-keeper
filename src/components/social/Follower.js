@@ -1,13 +1,19 @@
 import { Button } from "reactstrap"
+import FollowsRepository from "../repositories/FollowsRepository"
 
 const Follower = (props) => {
+    const handleUnfollow = () => {
+        FollowsRepository.delete(props.followId)
+            .then(props.syncFollowList)
+        // debugger
+    }
     return (
         <tr>
             <th scope="row">
                 {props.firstName} {props.lastName}
             </th>
             <td>
-                {props.currentTitle} by {props.currentAuthor}
+                {props.currentTitle ? `${props.currentTitle} by ${props.currentAuthor}` : "Not currently reading"}
             </td>
             <td>
                 {props.totalBookCount}
@@ -17,10 +23,10 @@ const Follower = (props) => {
             </td>
             <td>
             </td>
-        <td>
-                <Button>unfollow</Button>
+            <td>
+                <Button onClick={handleUnfollow}>unfollow</Button>
             </td>
-        </tr >
+        </tr>
     )
 }
 export default Follower

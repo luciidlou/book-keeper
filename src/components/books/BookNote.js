@@ -17,7 +17,7 @@ const BookNote = (props) => {
                     className="mb-2 text-muted noteCard__date"
                     tag="h6"
                 >
-                    Page: {props.page}
+                    {props.page ? `Page: ${props.page}` : ""}
                 </CardSubtitle>
                 <CardText>
                     {props.note}

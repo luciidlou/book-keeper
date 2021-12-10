@@ -1,7 +1,8 @@
 import moment from "moment"
 import { useEffect, useState } from "react"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { Button, Input } from "reactstrap"
+import useSimpleAuth from "../hooks/useSimpleAuth"
 import BookNotesRepository from "../repositories/BookNotesRepository"
 import PostsRepository from "../repositories/PostsRepository"
 import ShelvesRepository from "../repositories/ShelvesRepository"
@@ -9,9 +10,12 @@ import UserBooksRepository from "../repositories/UserBooksRepository"
 
 const UserBook = (props) => {
     const history = useHistory()
+    const { getCurrentUser } = useSimpleAuth()
+    const currentUser = getCurrentUser()
     const [shelves, setShelves] = useState([])
     const [post] = useState({
-        userBookId: 0,
+        bookId: 0,
+        userId: currentUser.id,
         shelfId: 0,
         dateCreated: 0
     })
@@ -45,7 +49,7 @@ const UserBook = (props) => {
         }
 
         UserBooksRepository.updateShelf(editedUserBook)
-            .then(userBookResponse => { post.userBookId = userBookResponse.id })
+            .then(userBookResponse => { post.bookId = userBookResponse.bookId })
             .then(() => PostsRepository.add(post))
             .then(props.syncUserBooks)
             .then(() => syncShelves())
@@ -104,12 +108,22 @@ const UserBook = (props) => {
         }
     }
 
+    const generateDynamicTitle = () => {
+        if (props.wikiLink) {
+            return <div><a target="_blank" rel="noreferrer" href={props.wikiLink}>{props.title}</a> ({props.publicationYear})</div>
+        }
+        else {
+            return<div>{props.title} ({props.publicationYear})</div>
+        }
+    }
+    const displayDynamicTitle = generateDynamicTitle()
+    
     const displayDateRead = generateDateRead()
 
     return (
         <tr>
             <th scope="row">
-                <Link to={`/mybooks/${props.bookId}`}>{props.title}</Link> ({props.publicationYear})
+                {displayDynamicTitle}
             </th>
             <td>
                 {props.author}
@@ -132,7 +146,7 @@ const UserBook = (props) => {
                 {displayDateRead}
             </td>
             <td>
-                <Button onClick={() => { history.push(`/mybooks/${props.bookId}/addnote`) }}>Add note</Button>
+                <Button onClick={() => { history.push(`/mybooks/${props.bookId}`) }}>Notes</Button>
             </td>
             <td>
                 <Button onClick={handleRemoveBook}>Delete</Button>

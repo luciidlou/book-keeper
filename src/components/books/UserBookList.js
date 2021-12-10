@@ -51,20 +51,21 @@ const BookList = () => {
                         </thead>
                         <tbody>
                             {
-                                currentUsersBooks?.map((userBook) => {
+                                currentUsersBooks?.map(userBook => {
                                     return (
                                         <UserBook
                                             key={userBook.id}
+                                            userBookId={userBook.id}
+                                            userBook={userBook}
+                                            userId={currentUser.id}
                                             title={userBook.book?.title}
                                             author={userBook.book?.author}
                                             publicationYear={userBook.book?.publicationYear}
+                                            wikiLink={userBook.book?.wikiLink}
                                             shelf={userBook.shelf}
                                             dateAdded={userBook.dateAdded}
                                             dateRead={userBook.dateRead}
                                             bookId={userBook.bookId}
-                                            userId={currentUser.id}
-                                            userBookId={userBook.id}
-                                            userBook={userBook}
                                             syncUserBooks={syncUserBooks} />
                                     )
                                 })

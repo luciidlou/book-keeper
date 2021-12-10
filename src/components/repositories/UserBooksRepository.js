@@ -17,7 +17,7 @@ const UserBooksRepository = {
             },
             body: JSON.stringify(newUserBook)
         }
-        const res = await fetch(`${Settings.remoteURL}/userBooks`, fetchOptions)
+        const res = await fetch(`${Settings.remoteURL}/userBooks?_expand=book&_expand=shelf`, fetchOptions)
         return await res.json()
     },
     async delete(id) {

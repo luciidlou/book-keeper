@@ -18,7 +18,8 @@ const BookForm = () => {
     const [book, updateBook] = useState({
         title: "",
         author: "",
-        publicationYear: "2021"
+        publicationYear: "2021",
+        wikiLink: ""
     })
     const [userBook, updateUserBook] = useState({
         bookId: 0,
@@ -28,7 +29,8 @@ const BookForm = () => {
         dateRead: ""
     })
     const [post, updatePost] = useState({
-        userBookId: 0,
+        bookId: 0,
+        userId: currentUser.id,
         shelfId: 0,
         dateCreated: ""
     })
@@ -49,10 +51,10 @@ const BookForm = () => {
                 userBook.bookId = bookResponse.id
                 userBook.shelfId === 3
                     ? userBook.dateRead = currentDate.toLocaleDateString("en-US") && UserBooksRepository.add(userBook)
-                        .then((userBookResponse) => post.userBookId = userBookResponse.id)
+                        .then((userBookResponse) => post.bookId = userBookResponse.bookId)
                         .then(() => PostsRepository.add(post))
                     : UserBooksRepository.add(userBook)
-                        .then((userBookResponse) => post.userBookId = userBookResponse.id)
+                        .then((userBookResponse) => post.bookId = userBookResponse.bookId)
                         .then(() => PostsRepository.add(post))
             })
             .then(() => { history.push("/mybooks") })
@@ -102,6 +104,20 @@ const BookForm = () => {
                     onChange={(event) => {
                         const bookCopy = { ...book }
                         bookCopy.publicationYear = event.target.value
+                        updateBook(bookCopy)
+                    }} />
+            </FormGroup>
+            <FormGroup className="form__field">
+                <Label for="wikiLink" className="form__label">Wikipedia page: </Label>
+                <Input
+                    className="form__control"
+                    id="wikiLink"
+                    type="url"
+                    pattern="https?://.+" title="Include http://"
+                    placeholder="https://wikipedia.org..."
+                    onChange={(event) => {
+                        const bookCopy = { ...book }
+                        bookCopy.wikiLink = event.target.value
                         updateBook(bookCopy)
                     }} />
             </FormGroup>
