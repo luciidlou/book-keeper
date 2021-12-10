@@ -49,16 +49,16 @@ const Post = (props) => {
             <Card className="noteCard">
                 <CardBody className="noteCard__body">
                     <CardTitle className="noteCard__title">
-                        <span className="user-name">{props.firstName} {props.lastName}</span> {displayDynamicText} {props.title} by {props.author}
+                        <span className="user-name">{props.firstName} {props.lastName}</span>
                     </CardTitle>
                     <CardSubtitle
                         className="mb-2 text-muted noteCard__date"
                         tag="h6"
                     >
-                        {props.dateCreated}
+                        {displayDynamicText} <span style={{ fontWeight: "bold" }}>{props.title}</span> by {props.author}
                     </CardSubtitle>
                     <CardText>
-                        What do I put here???
+                        {props.dateCreated}
                     </CardText>
                     {
                         isCurrentUsersPost

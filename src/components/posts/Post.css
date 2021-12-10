@@ -1,3 +1,7 @@
+.noteCard {
+    width: 80%;
+    margin: 1em auto;
+}
 .noteCard__title {
     font-size: large;
 }

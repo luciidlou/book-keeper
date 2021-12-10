@@ -4,7 +4,7 @@ import { Button } from "reactstrap"
 import useSimpleAuth from "../hooks/useSimpleAuth"
 import PostList from "../posts/PostList"
 import UserBooksRepository from "../repositories/UserBooksRepository"
-import "./Home.css"
+import "./Home2.css"
 import bookmark from "../../images/bookmark1.png"
 import ShelvesRepository from "../repositories/ShelvesRepository"
 
@@ -68,7 +68,7 @@ const Home = () => {
     return (
         <div className="home-container">
             <aside className="aside">
-                <Button className="new-book-btn" onClick={() => { history.push("/mybooks/addbook") }}>Add new book</Button>
+                <Button id="newBookBtn" onClick={() => { history.push("/mybooks/addbook") }}>Add new book</Button>
                 <div className="aside__book">
                     <h5><img id="asideImg" src={bookmark} alt="a bookmarked book" /> Currently reading...</h5>
                     {
@@ -102,10 +102,8 @@ const Home = () => {
                 </div>
             </aside>
             <section className="posts">
-                <div className="posts__feed">
                     <h2 className="updates-header">Updates</h2>
                     <PostList />
-                </div>
             </section>
         </div>
     )

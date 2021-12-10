@@ -1,0 +1,37 @@
+.home-container {
+    display: flex;
+    margin: 4em 2em 2em 2em; 
+}
+.aside {
+    flex: 2;
+    padding-right: 4em;
+}
+#asideImg {
+    height: 42px;
+    width: 42px;
+}
+#newBookBtn {
+    margin: 4em 0 1em 0;
+}
+.aside__book {
+    margin: 1em 0 2em 0;
+}
+.shelves-header {
+    margin-bottom: 2em;
+    border-bottom: 1px solid black;
+    padding: 0 1em 0 0;
+    width: fit-content
+}
+.shelf-count {
+    margin-bottom: 2em;
+}
+.posts {
+    flex: 7;
+    margin-right: 15%;
+}
+.updates-header {
+    text-align: center;
+    margin-bottom: 2em;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}

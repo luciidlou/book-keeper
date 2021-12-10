@@ -1,28 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Table } from "reactstrap"
 import useSimpleAuth from "../hooks/useSimpleAuth"
-import UserBooksRepository from "../repositories/UserBooksRepository"
 import UserBook from "./UserBook"
 import "./UserBookList.css"
-const BookList = () => {
+const UserBookList = ({ syncUserBooks, userBooks }) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
-    const [userBooks, setUserBooks] = useState([])
     const history = useHistory()
-
-    const syncUserBooks = () => {
-        UserBooksRepository.getAll().then(setUserBooks)
-    }
 
     useEffect(() => {
         syncUserBooks()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const currentUsersBooks = userBooks.filter(ub => ub.userId === currentUser.id)
 
     return (
-        <>
+        <div className="bookListContainer">
             <div className="btn-container">
                 <Button className="new-book-btn" onClick={() => { history.push("/mybooks/addbook") }}>Add new book</Button>
             </div>
@@ -61,7 +56,7 @@ const BookList = () => {
                                             title={userBook.book?.title}
                                             author={userBook.book?.author}
                                             publicationYear={userBook.book?.publicationYear}
-                                            wikiLink={userBook.book?.wikiLink}
+                                            url={userBook.book?.url}
                                             shelf={userBook.shelf}
                                             dateAdded={userBook.dateAdded}
                                             dateRead={userBook.dateRead}
@@ -74,7 +69,7 @@ const BookList = () => {
                     </Table>
                     : "You don't have any books yet!"
             }
-        </>
+        </div>
     )
 }
-export default BookList
+export default UserBookList

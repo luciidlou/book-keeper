@@ -44,6 +44,7 @@ const UserBook = (props) => {
             bookId: props.bookId,
             shelfId: newShelf,
             userId: props.userId,
+            url: props.url,
             dateAdded: props.dateAdded,
             dateRead: props.dateRead
         }
@@ -62,6 +63,7 @@ const UserBook = (props) => {
             bookId: props.bookId,
             shelfId: props.shelf?.id,
             userId: props.userId,
+            url: props.url,
             dateAdded: props.dateAdded,
             dateRead: newDateRead
         }
@@ -109,16 +111,16 @@ const UserBook = (props) => {
     }
 
     const generateDynamicTitle = () => {
-        if (props.wikiLink) {
-            return <div><a target="_blank" rel="noreferrer" href={props.wikiLink}>{props.title}</a> ({props.publicationYear})</div>
+        if (props.url) {
+            return <div><a target="_blank" rel="noreferrer" href={props.url}>{props.title}</a> ({props.publicationYear})</div>
         }
         else {
             return<div>{props.title} ({props.publicationYear})</div>
         }
     }
-    const displayDynamicTitle = generateDynamicTitle()
-    
     const displayDateRead = generateDateRead()
+    
+    const displayDynamicTitle = generateDynamicTitle()
 
     return (
         <tr>

@@ -9,7 +9,7 @@ import ShelvesRepository from "../repositories/ShelvesRepository"
 import UserBooksRepository from "../repositories/UserBooksRepository"
 import "./BookForm.css"
 
-const BookForm = () => {
+const BookForm = (syncUserBooks) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const history = useHistory()
@@ -19,7 +19,7 @@ const BookForm = () => {
         title: "",
         author: "",
         publicationYear: "2021",
-        wikiLink: ""
+        url: ""
     })
     const [userBook, updateUserBook] = useState({
         bookId: 0,
@@ -58,7 +58,7 @@ const BookForm = () => {
                         .then(() => PostsRepository.add(post))
             })
             .then(() => { history.push("/mybooks") })
-            .then(() => { UserBooksRepository.getAll() })
+            .then(syncUserBooks)
     }
 
     return (
@@ -108,16 +108,16 @@ const BookForm = () => {
                     }} />
             </FormGroup>
             <FormGroup className="form__field">
-                <Label for="wikiLink" className="form__label">Wikipedia page: </Label>
+                <Label for="url" className="form__label">Wikipedia page: </Label>
                 <Input
                     className="form__control"
-                    id="wikiLink"
+                    id="url"
                     type="url"
                     pattern="https?://.+" title="Include http://"
                     placeholder="https://wikipedia.org..."
                     onChange={(event) => {
                         const bookCopy = { ...book }
-                        bookCopy.wikiLink = event.target.value
+                        bookCopy.url = event.target.value
                         updateBook(bookCopy)
                     }} />
             </FormGroup>

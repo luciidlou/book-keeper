@@ -125,7 +125,6 @@ const FollowersList = () => {
                     syncFollowList={syncFollowList}
                 />
             </main>
-
         </>
     )
 }
