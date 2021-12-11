@@ -1,8 +1,8 @@
-import useSimpleAuth from "../hooks/useSimpleAuth"
+import useSimpleAuth from "../../hooks/useSimpleAuth"
 import { useState, useEffect } from "react"
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
-import PostsRepository from "../repositories/PostsRepository"
-import FollowsRepository from "../repositories/FollowsRepository"
+import PostsRepository from "../../repositories/PostsRepository"
+import FollowsRepository from "../../repositories/FollowsRepository"
 import "./Post.css"
 
 const Post = (props) => {

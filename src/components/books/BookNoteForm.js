@@ -3,9 +3,9 @@ import { useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { useState } from "react/cjs/react.development"
 import { Button, Form, FormGroup, Input, Label } from "reactstrap"
-import useSimpleAuth from "../hooks/useSimpleAuth"
-import BookNotesRepository from "../repositories/BookNotesRepository"
-import UserBooksRepository from "../repositories/UserBooksRepository"
+import useSimpleAuth from "../../hooks/useSimpleAuth"
+import BookNotesRepository from "../../repositories/BookNotesRepository"
+import UserBooksRepository from "../../repositories/UserBooksRepository"
 import "./BookNoteForm.css"
 
 

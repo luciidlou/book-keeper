@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Table } from "reactstrap"
-import useSimpleAuth from "../hooks/useSimpleAuth"
+import useSimpleAuth from "../../hooks/useSimpleAuth"
 import UserBook from "./UserBook"
 import "./UserBookList.css"
 const UserBookList = ({ syncUserBooks, userBooks }) => {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button } from "reactstrap"
-import useSimpleAuth from "../hooks/useSimpleAuth"
-import PostList from "../posts/PostList"
-import UserBooksRepository from "../repositories/UserBooksRepository"
-import "./Home.css"
+import useSimpleAuth from "../../hooks/useSimpleAuth"
+import UserBooksRepository from "../../repositories/UserBooksRepository"
+import ShelvesRepository from "../../repositories/ShelvesRepository"
 import bookmark from "../../images/bookmark1.png"
-import ShelvesRepository from "../repositories/ShelvesRepository"
+import PostList from "../posts/PostList"
+import "./Home.css"
 
 const Home = () => {
     const history = useHistory()

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom";
-import useSimpleAuth from "../hooks/useSimpleAuth";
+import useSimpleAuth from "../../hooks/useSimpleAuth";
 import "./Login.css"
 
 export const Register = () => {

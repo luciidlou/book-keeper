@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import BooksRepositiory from "../repositories/BooksRepositiory"
-import PostsRepository from "../repositories/PostsRepository"
-import UsersRepository from "../repositories/UsersRepository"
+import BooksRepositiory from "../../repositories/BooksRepositiory"
+import PostsRepository from "../../repositories/PostsRepository"
+import UsersRepository from "../../repositories/UsersRepository"
 import Post from "./Post"
 import "./PostList.css"
 

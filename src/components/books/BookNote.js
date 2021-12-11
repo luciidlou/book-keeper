@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
-import BookNotesRepository from "../repositories/BookNotesRepository"
+import BookNotesRepository from "../../repositories/BookNotesRepository"
 import "./BookNote.css"
 
 const BookNote = (props) => {

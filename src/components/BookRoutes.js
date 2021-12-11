@@ -4,7 +4,7 @@ import BookForm from "./books/BookForm"
 import BookNoteForm from "./books/BookNoteForm"
 import BookNoteList from "./books/BookNoteList"
 import UserBookList from "./books/UserBookList"
-import UserBooksRepository from "./repositories/UserBooksRepository"
+import UserBooksRepository from "../repositories/UserBooksRepository"
 
 const BookRoutes = () => {
     const [userBooks, setUserBooks] = useState([])

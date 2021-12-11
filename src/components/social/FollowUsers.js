@@ -1,9 +1,9 @@
 import moment from "moment"
 import { useEffect, useState } from "react"
 import { Button } from "reactstrap"
-import useSimpleAuth from "../hooks/useSimpleAuth"
-import FollowsRepository from "../repositories/FollowsRepository"
-import UsersRepository from "../repositories/UsersRepository"
+import useSimpleAuth from "../../hooks/useSimpleAuth"
+import FollowsRepository from "../../repositories/FollowsRepository"
+import UsersRepository from "../../repositories/UsersRepository"
 import "./FollowUsers.css"
 
 const FollowUsers = (props) => {

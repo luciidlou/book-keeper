@@ -2,7 +2,7 @@ import { Redirect, Route } from "react-router-dom"
 import ApplicationViews from "./ApplicationViews"
 import Login from "./auth/Login"
 import { Register } from "./auth/Register"
-import useSimpleAuth from "./hooks/useSimpleAuth"
+import useSimpleAuth from "../hooks/useSimpleAuth"
 import { NavBar } from "./nav/NavBar"
 import "./Bookkeeper.css"
 

@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { useEffect } from "react/cjs/react.development"
 import { Table } from "reactstrap"
-import useSimpleAuth from "../hooks/useSimpleAuth"
-import FollowsRepository from "../repositories/FollowsRepository"
-import UsersRepository from "../repositories/UsersRepository"
-import "./FollowersList.css"
+import useSimpleAuth from "../../hooks/useSimpleAuth"
+import FollowsRepository from "../../repositories/FollowsRepository"
+import UsersRepository from "../../repositories/UsersRepository"
+import BooksRepositiory from "../../repositories/BooksRepositiory"
 import FollowUsers from "./FollowUsers"
 import Follower from "./Follower"
-import BooksRepositiory from "../repositories/BooksRepositiory"
+import "./FollowersList.css"
 const FollowersList = () => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()

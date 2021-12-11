@@ -1,5 +1,5 @@
 import { Button } from "reactstrap"
-import FollowsRepository from "../repositories/FollowsRepository"
+import FollowsRepository from "../../repositories/FollowsRepository"
 import "./Follower.css"
 const Follower = (props) => {
     const handleUnfollow = () => {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { Button } from "reactstrap"
-import BookNotesRepository from "../repositories/BookNotesRepository"
-import BooksRepositiory from "../repositories/BooksRepositiory"
+import BookNotesRepository from "../../repositories/BookNotesRepository"
+import BooksRepositiory from "../../repositories/BooksRepositiory"
 import BookNote from "./BookNote"
 import "./BookNoteList.css"
 

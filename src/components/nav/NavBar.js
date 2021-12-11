@@ -1,5 +1,5 @@
 import { Nav, NavItem, NavLink } from "reactstrap"
-import useSimpleAuth from "../hooks/useSimpleAuth"
+import useSimpleAuth from "../../hooks/useSimpleAuth"
 import "./NavBar.css"
 import worldBook from "../../images/world-book.png"
 import { useHistory } from "react-router-dom"
