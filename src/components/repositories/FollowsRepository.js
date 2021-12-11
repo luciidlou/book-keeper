@@ -14,7 +14,7 @@ const FollowsRepository = {
             },
             body: JSON.stringify(follow)
         }
-        const res = await fetch(`${Settings.remoteURL}/follows?_expand=user`, fetchOptions)
+        const res = await fetch(`${Settings.remoteURL}/follows?_sort=dateFollowed&_order=desc&_expand=user`, fetchOptions)
         return await res.json()
     },
     async getAll() {

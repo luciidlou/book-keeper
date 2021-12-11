@@ -28,14 +28,16 @@ const FollowUsers = (props) => {
         syncFollows()
     }, [props.syncFollowList])
 
-    const isolateFollowIds = () => {
+    const isolateFollowedUserIds = () => {
         const followIdArr = []
         for (const follow of follows) {
             followIdArr.push(follow.followedUserId)
         }
         return followIdArr
     }
-    const arrOfFollowIds = isolateFollowIds()
+    const arrOfFollowedUserIds = isolateFollowedUserIds()
+
+
 
     return (
         <div className="container">
@@ -43,6 +45,15 @@ const FollowUsers = (props) => {
             <aside className="add-friends">
                 {
                     users.map(user => {
+                        const generatePromptToFollowBack = () => {
+                            for (const follow of follows) {
+                                if (follow.userId === user.id && follow.followedUserId === currentUser.id) {
+                                    return true
+                                }
+                            }
+                        }
+                        const promptToFollowBack = generatePromptToFollowBack()
+
                         const handleFollow = () => {
                             const currentDate = new Date()
                             const newFollow = {
@@ -51,19 +62,16 @@ const FollowUsers = (props) => {
                                 dateFollowed: moment(currentDate).format('MMMM Do YYYY')
                             }
                             FollowsRepository.add(newFollow)
-                                // .then(isolateFollowIds)
-                                // .then(syncUsers)
-                                // .then(syncFollows)
                                 .then(props.syncFollowList)
                         }
-                        if (user.id !== currentUser.id && !arrOfFollowIds.includes(user.id)) {
+                        if (user.id !== currentUser.id && !arrOfFollowedUserIds.includes(user.id)) {
                             return (
                                 <div className="add-friends__list" key={user.id}>
                                     <div className="user-name">
                                         {user.firstName} {user.lastName}
                                     </div>
                                     <div className="btn friend-btn">
-                                        <Button onClick={handleFollow}>Follow</Button>
+                                        <Button id="followBtn" onClick={handleFollow}>{promptToFollowBack ? "Follow back" : "Follow"}</Button>
                                     </div>
                                 </div>
                             )

@@ -8,7 +8,9 @@ input,
 select,
 textarea {
 	color: #404040;
-    font-family: 'Montserrat', sans-serif;
+  background-color: #DCD9D4;
+  background-blend-mode: soft-light,screen;
+  font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	line-height: 1.5;
 }

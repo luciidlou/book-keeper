@@ -1,0 +1,14 @@
+.dateRead {
+    width: min-content;
+    background-color: #f7f4f1;
+}
+.dateRead:disabled {
+    width: min-content;
+    background-color: #e0e0e0;
+}
+#notesBtn, #deleteNoteBtn {
+    width: 150px;
+}
+.bookRow:nth-child(even) {
+    background-color: #c9c7c2;
+}

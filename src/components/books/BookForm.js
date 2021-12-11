@@ -9,7 +9,7 @@ import ShelvesRepository from "../repositories/ShelvesRepository"
 import UserBooksRepository from "../repositories/UserBooksRepository"
 import "./BookForm.css"
 
-const BookForm = (syncUserBooks) => {
+const BookForm = ({ syncUserBooks }) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const history = useHistory()
@@ -53,12 +53,13 @@ const BookForm = (syncUserBooks) => {
                     ? userBook.dateRead = currentDate.toLocaleDateString("en-US") && UserBooksRepository.add(userBook)
                         .then((userBookResponse) => post.bookId = userBookResponse.bookId)
                         .then(() => PostsRepository.add(post))
+                        .then(syncUserBooks)
                     : UserBooksRepository.add(userBook)
                         .then((userBookResponse) => post.bookId = userBookResponse.bookId)
                         .then(() => PostsRepository.add(post))
+                        .then(syncUserBooks)
             })
             .then(() => { history.push("/mybooks") })
-            .then(syncUserBooks)
     }
 
     return (
@@ -68,6 +69,7 @@ const BookForm = (syncUserBooks) => {
                 <Label for="title" className="form__label">Title: </Label>
                 <Input
                     className="form__control title"
+                    id="title"
                     type="text"
                     required autoFocus
                     placeholder="Title of book..."
@@ -81,6 +83,7 @@ const BookForm = (syncUserBooks) => {
                 <Label for="author" className="form__label">Author: </Label>
                 <Input
                     className="form__control author"
+                    id="author"
                     type="text"
                     required
                     placeholder="Name of author..."
@@ -108,13 +111,13 @@ const BookForm = (syncUserBooks) => {
                     }} />
             </FormGroup>
             <FormGroup className="form__field">
-                <Label for="url" className="form__label">Wikipedia page: </Label>
+                <Label for="url" className="form__label">URL: (ex. wikipedia, goodreads, amazon, etc) </Label>
                 <Input
                     className="form__control"
                     id="url"
                     type="url"
                     pattern="https?://.+" title="Include http://"
-                    placeholder="https://wikipedia.org..."
+                    placeholder="https://www..."
                     onChange={(event) => {
                         const bookCopy = { ...book }
                         bookCopy.url = event.target.value

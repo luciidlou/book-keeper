@@ -3,4 +3,10 @@
 }
 #pageNum {
     width: 6em;
+    background-color: #f0ede9;
+}
+#note {
+    width: 60%;
+    height: 150px;
+    background-color: #f0ede9;
 }

@@ -3,11 +3,10 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Input } from "reactstrap"
 import useSimpleAuth from "../hooks/useSimpleAuth"
-import BookNotesRepository from "../repositories/BookNotesRepository"
 import PostsRepository from "../repositories/PostsRepository"
 import ShelvesRepository from "../repositories/ShelvesRepository"
 import UserBooksRepository from "../repositories/UserBooksRepository"
-
+import "./UserBook.css"
 const UserBook = (props) => {
     const history = useHistory()
     const { getCurrentUser } = useSimpleAuth()
@@ -28,7 +27,6 @@ const UserBook = (props) => {
 
     const handleRemoveBook = () => {
         UserBooksRepository.delete(props.userBookId)
-            .then(BookNotesRepository.deleteNotesForUserBook(props.userBookId))
             .then(props.syncUserBooks)
     }
 
@@ -79,14 +77,14 @@ const UserBook = (props) => {
             return <Input
                 disabled
                 placeholder="mm/dd/yyyy"
-                className="form__control"
+                className="form__control dateRead"
                 type="date"
                 onChange={handleDateReadChange} />
         }
         else if (hasBeenRead && !props.dateRead) {
             return <Input
                 placeholder="mm/dd/yyyy"
-                className="form__control"
+                className="form__control dateRead"
                 type="date"
                 onChange={handleDateReadChange} />
         }
@@ -94,14 +92,14 @@ const UserBook = (props) => {
             return <Input
                 disabled
                 defaultValue={props.dateRead}
-                className="form__control"
+                className="form__control dateRead"
                 type="date"
                 onChange={handleDateReadChange} />
         }
         else if (props.dateRead) {
             return <Input
                 defaultValue={props.dateRead}
-                className="form__control"
+                className="form__control dateRead"
                 type="date"
                 onChange={handleDateReadChange} />
         }
@@ -123,7 +121,7 @@ const UserBook = (props) => {
     const displayDynamicTitle = generateDynamicTitle()
 
     return (
-        <tr>
+        <tr className="bookRow">
             <th scope="row">
                 {displayDynamicTitle}
             </th>
@@ -148,10 +146,10 @@ const UserBook = (props) => {
                 {displayDateRead}
             </td>
             <td>
-                <Button onClick={() => { history.push(`/mybooks/${props.bookId}`) }}>Notes ({props.userBook?.bookNotes.length})</Button>
+                <Button id="notesBtn" onClick={() => { history.push(`/mybooks/${props.bookId}`) }}>Notes ({props.userBook?.bookNotes.length})</Button>
             </td>
             <td>
-                <Button onClick={handleRemoveBook}>Delete</Button>
+                <Button id="deleteNoteBtn" onClick={handleRemoveBook}>Delete</Button>
             </td>
         </tr>
     )

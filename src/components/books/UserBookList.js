@@ -42,9 +42,15 @@ const UserBookList = ({ syncUserBooks, userBooks }) => {
                                 <th>
                                     Last date read
                                 </th>
+                                <th>
+                                    Add/review notes
+                                </th>
+                                <th>
+                                    Delete book
+                                </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="tableBody">
                             {
                                 currentUsersBooks?.map(userBook => {
                                     return (

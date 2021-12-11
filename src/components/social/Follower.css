@@ -1,0 +1,3 @@
+.followsRow:nth-child(even) {
+    background-color: #c9c7c2;
+}

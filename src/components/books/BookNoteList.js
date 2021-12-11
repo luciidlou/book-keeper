@@ -32,7 +32,7 @@ const BookNoteList = () => {
             <div className="btn-container">
                 <Button className="addNote-btn" onClick={() => { history.push(`/mybooks/${bookId}/addnote`) }}>{filteredNotes.length > 0 ? "Add additional notes" : "Add notes"}</Button>
             </div>
-            <div className="notes-container__title">{filteredNotes.length > 0 ? `Notes for "${book?.title}" by ${book?.author}` : `You don't have any notes for "${book?.title}"`}</div>
+            <h4 className="notes-container__title">{filteredNotes.length > 0 ? `Notes for "${book?.title}" by ${book?.author}` : `You don't have any notes for "${book?.title}"`}</h4>
             <div className="notes-container">
                 
                 {

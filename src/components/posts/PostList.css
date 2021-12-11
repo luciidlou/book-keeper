@@ -1,0 +1,9 @@
+.postList {
+    position: relative;
+    animation: postList 1s linear;
+}
+@keyframes postList {
+    from {top: 800px;}
+    to {top: 0px;}
+
+}

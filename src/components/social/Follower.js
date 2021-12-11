@@ -1,14 +1,13 @@
 import { Button } from "reactstrap"
 import FollowsRepository from "../repositories/FollowsRepository"
-
+import "./Follower.css"
 const Follower = (props) => {
     const handleUnfollow = () => {
         FollowsRepository.delete(props.followId)
             .then(props.syncFollowList)
-        // debugger
     }
     return (
-        <tr>
+        <tr className="followsRow">
             <th scope="row">
                 {props.firstName} {props.lastName}
             </th>

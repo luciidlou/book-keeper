@@ -31,7 +31,7 @@ const Post = (props) => {
 
     const checkIsFollowed = () => {
         for (const follow of follows) {
-            if (follow.followId === props.userId && follow.userId === currentUser.id) {
+            if (follow.followedUserId === props.userId && follow.userId === currentUser.id) {
                 return true
             }
         }

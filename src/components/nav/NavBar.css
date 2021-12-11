@@ -11,13 +11,34 @@
     height: 60px;
 }
 .nav-headerLeft {
+    position: relative;
+    animation: headerLeft 1s linear;
     margin: 0 15px;
 }
+@keyframes headerLeft {
+    from {right: 500px;}
+    to {right: 0px;}
+}
 .nav-headerRight {
+    position: relative;
+    animation: headerRight 1s linear;
     margin: 20px 15px;
+}
+@keyframes headerRight {
+    from {left: 500px;}
+    to {left: 0px;}
 }
 .navbar {
     display: flex;
     justify-content: space-around;
     align-content: center;
+    font-size: 35px;
+}
+.navbar__link {
+    border-radius: 15px;
+    color: darkgoldenrod;
+}
+.navbar__link:hover {
+    color: rgb(255, 255, 255);
+    background-color: darkgoldenrod;
 }

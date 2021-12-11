@@ -14,10 +14,10 @@ const BookNote = (props) => {
                     {props.dateAdded}
                 </CardTitle>
                 <CardSubtitle
-                    className="mb-2 text-muted noteCard__date"
+                    className="mb-2 text-muted noteCard__page"
                     tag="h6"
                 >
-                    {props.page ? `Page: ${props.page}` : ""}
+                    {props.page ? `Page: ${props.page}` : "Page: N/A"}
                 </CardSubtitle>
                 <CardText>
                     {props.note}

@@ -8,7 +8,7 @@ use the await keyword (in an async function) to wait for a promise to be resolve
 
 const BookNotesRepository = {
     async getAll() {
-        const res = await fetch(`${Settings.remoteURL}/bookNotes?_expand=userBook`)
+        const res = await fetch(`${Settings.remoteURL}/bookNotes?_sort=dateAdded&_order=desc&_expand=userBook`)
         return await res.json()
     },
     async add(note) {

@@ -9,23 +9,29 @@
     padding: 10px 0 20px 0;
     width: 35%;
 }
-.title {
-    width: 45%
+#title {
+    width: 45%;
+    background-color: #f0ede9;
 }
-.author {
-    width: 20%
+#author {
+    width: 20%;
+    background-color: #f0ede9;
 }
 #pubYear {
     width: 11em;
+    background-color: #f0ede9;
 }
 #url {
-    width: 40%
+    width: 40%;
+    background-color: #f0ede9;
 }
 #select {
     width: 11em;
+    background-color: #f0ede9;
 }
 #date {
     width: 11em;
+    background-color: #f0ede9;
 }
 .submit-book {
     margin-right: 20px;

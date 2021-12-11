@@ -14,3 +14,6 @@
 .add-friends__list {
     margin-bottom: 2em;
 }
+#followBtn {
+    width: 150px;
+}
