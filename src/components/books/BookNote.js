@@ -2,9 +2,13 @@ import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "react
 import BookNotesRepository from "../../repositories/BookNotesRepository"
 import "./BookNote.css"
 
+// This function is responsible for rendering the BookNote component. It returns a single bookNote object as a <Card> element (JSX)
 const BookNote = (props) => {
+    // This function is responsible for deleting a bookNote object from the API using the DELETE fetch method
     const handleNoteDelete = (id) => {
+        // (see the BookNotesRepository for the delete() function declaration)
         BookNotesRepository.delete(id)
+            // THEN, update the userBooks state variable by calling the syncUserBooks function (see BookRoutes module for function declaration)
             .then(props.syncBookNotes)
     }
     return (

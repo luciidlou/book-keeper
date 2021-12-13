@@ -4,26 +4,36 @@ import { Button, Table } from "reactstrap"
 import useSimpleAuth from "../../hooks/useSimpleAuth"
 import UserBook from "./UserBook"
 import "./UserBookList.css"
+
+// This function is responsible for rendering the UserBookList component. It returns a <Table> element (JSX)
 const UserBookList = ({ syncUserBooks, userBooks }) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const history = useHistory()
 
+    // This useEffect hook is responsible for updating the userBooks state located in the BookRoutes module (only runs once b/c of empty dependency array)
     useEffect(() => {
+        // (see the BookRoutes module for the syncUserBooks function declaration)
         syncUserBooks()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    // The value of currentUsersBooks is an array of userBook objects that belong to the currentUser
     const currentUsersBooks = userBooks.filter(ub => ub.userId === currentUser.id)
 
     return (
         <div className="bookListContainer">
+            <div className="header-userBooks">
+                <h2>My books</h2>
+            </div>
             <div className="btn-container">
                 <Button className="new-book-btn" onClick={() => { history.push("/mybooks/addbook") }}>Add new book</Button>
             </div>
             {
+                // IF the currentUsersBooks array is NOT empty (meaning it holds at least one object)
                 currentUsersBooks?.length
                     ?
+                    // THEN return our <Table> element
                     <Table borderless>
                         <thead>
                             <tr>
@@ -52,6 +62,7 @@ const UserBookList = ({ syncUserBooks, userBooks }) => {
                         </thead>
                         <tbody className="tableBody">
                             {
+                                // Here we are iterating through the currentUsersBooks array using the .map() method and returning the UserBook component for each object in that array
                                 currentUsersBooks?.map(userBook => {
                                     return (
                                         <UserBook
@@ -73,6 +84,7 @@ const UserBookList = ({ syncUserBooks, userBooks }) => {
                             }
                         </tbody>
                     </Table>
+                    // ELSE (currentUsersBooks array is empty), return the following string
                     : "You don't have any books yet!"
             }
         </div>

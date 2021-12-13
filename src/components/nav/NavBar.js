@@ -4,6 +4,7 @@ import "./NavBar.css"
 import worldBook from "../../images/world-book.png"
 import { useHistory } from "react-router-dom"
 
+// This function is responsible for rendering the NavBar component
 export const NavBar = () => {
     const { isAuthenticated, logout, getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()

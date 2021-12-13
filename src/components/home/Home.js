@@ -15,14 +15,19 @@ const Home = () => {
     const [userBooks, setUserBooks] = useState([])
     const [shelves, setShelves] = useState([])
 
+    // This useEffect is responsible for updating our userBooks state variable (only runs once b/c of empty dependency array)
     useEffect(() => {
+        // see the UserBooksRepository module for the getAll() function declaration
         UserBooksRepository.getAll().then(setUserBooks)
     }, [])
 
+    // This useEffect is responsible for updating our shelves state variable (only runs once b/c of empty dependency array)
     useEffect(() => {
+        // see the ShelvesRepository module for the getAll() function declaration
         ShelvesRepository.getAll().then(setShelves)
     }, [])
 
+    // This functions responsibility is to return an array of userBook objects that belong to the current user and have a shelfId of 1 
     const getWantToReadCount = () => {
         const wantToReadCount = []
         for (const shelf of shelves) {
@@ -36,6 +41,7 @@ const Home = () => {
     }
     const wantToReadCount = getWantToReadCount()
 
+    // This functions responsibility is to return an array of userBook objects that belong to the current user and have a shelfId of 2 
     const getCurrentReadsCount = () => {
         const count = []
         for (const shelf of shelves) {
@@ -49,6 +55,7 @@ const Home = () => {
     }
     const currentReadsCount = getCurrentReadsCount()
 
+    // This functions responsibility is to return an array of userBook objects that belong to the current user and have a shelfId of 3 
     const getReadCount = () => {
         const count = []
         for (const shelf of shelves) {
@@ -62,7 +69,7 @@ const Home = () => {
     }
     const readCount = getReadCount()
 
-
+    // The value of currentUserBooks is an array of userBooks that belong to the currentUser and have a shelfId of 2
     const currentUserBooks = userBooks.filter((userBook) => userBook.userId === currentUser.id && userBook.shelfId === 2)
 
     return (
@@ -72,8 +79,10 @@ const Home = () => {
                 <div className="aside__book">
                     <h5><img id="asideImg" src={bookmark} alt="a bookmarked book" /> Currently reading...</h5>
                     {
+                        // IF the currentUser has any books on the "Want to read" shelf...
                         currentUserBooks.length
                             ?
+                            // THEN iterate through the userBooks and display them in the DOM
                             currentUserBooks.map(userBook => {
                                 return (
                                     <div key={userBook.id} className="currentRead">
@@ -88,6 +97,7 @@ const Home = () => {
                                     </div>
                                 )
                             })
+                            // ELSE display the following string
                             : "You are not currently reading anything!"
                     }
                 </div>

@@ -9,18 +9,21 @@ import ShelvesRepository from "../../repositories/ShelvesRepository"
 import UserBooksRepository from "../../repositories/UserBooksRepository"
 import "./BookForm.css"
 
+// This function is responsible for rendering our BookForm component. It returns a <Form> element (JSX)
 const BookForm = ({ syncUserBooks }) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const history = useHistory()
     const [shelves, setShelves] = useState([])
 
+    // Here we are declaring our book state variable with the useState() hook and initializing it as an object with 4 key:value pairs 
     const [book, updateBook] = useState({
         title: "",
         author: "",
         publicationYear: "2021",
         url: ""
     })
+    // Here we are declaring our userBook state variable with the useState() hook and initializing it as an object with 5 key:value pairs 
     const [userBook, updateUserBook] = useState({
         bookId: 0,
         userId: currentUser.id,
@@ -28,6 +31,7 @@ const BookForm = ({ syncUserBooks }) => {
         dateAdded: "",
         dateRead: ""
     })
+    // Here we are declaring our post state variable with the useState() hook and initializing it as an object with 4 key:value pairs 
     const [post, updatePost] = useState({
         bookId: 0,
         userId: currentUser.id,
@@ -35,30 +39,47 @@ const BookForm = ({ syncUserBooks }) => {
         dateCreated: ""
     })
 
+    // This useEffect is responsible for updating our shelves state variable with the data we FETCH from the API
     useEffect(() => {
         ShelvesRepository.getAll().then(setShelves)
     }, [])
 
+    // The value of hasBeenRead is a boolean. It is TRUE if the userBook object has a shelfId with a value of 3
     const hasBeenRead = userBook.shelfId === 3
 
+    // This function is responsible for sending three new objects to the API using the POST fetch method. Those objects are book, userBook, and post.
     const handleSubmit = (event) => {
+        // The preventDefault() method of the Event interface tells the user agent that if the event does not get explicitly handled, its default action should not be taken as it normally would be.
         event.preventDefault()
+        // This is where we send the new book object to the API with a POST fetch method. (see the BooksRepository module for the add() function declaration)
         BooksRepositiory.add(book)
+            // THEN, capture the response from the fetch call and use it to change the value of the bookId property on the userBook object
             .then((bookResponse) => {
                 const currentDate = new Date()
                 userBook.dateAdded = currentDate.toLocaleDateString("en-US")
                 post.dateCreated = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a')
                 userBook.bookId = bookResponse.id
+                // IF the shelfId on the userBook object has a value of 3...
                 userBook.shelfId === 3
+                    // THEN, change the value of the dateRead property on the userBook object to the value of the currentDate variable 
+                    // AND send the userBook object to the API using the POST fetch method (see the UserBooksRepository module for the add() function)
                     ? userBook.dateRead = currentDate.toLocaleDateString("en-US") && UserBooksRepository.add(userBook)
+                        // THEN, capture the response from the fetch call and use it to change the value of the bookId property on the post object
                         .then((userBookResponse) => post.bookId = userBookResponse.bookId)
+                        // THEN, send the post object to the API using the POST fetch method. (see the PostsRepository module for the add() function declaration)
                         .then(() => PostsRepository.add(post))
+                        // THEN, update the userBooks state variable by calling the syncUserBooks function (see BookRoutes module for function declaration)
                         .then(syncUserBooks)
+                    // ELSE (meaning userBook.shelfId is not equal to 3), just send the userBook object (leaves dateRead property as an empty string) to the API using the POST fetch method
                     : UserBooksRepository.add(userBook)
+                        // THEN, capture the response from the fetch call and use it to change the value of the bookId property on the post object
                         .then((userBookResponse) => post.bookId = userBookResponse.bookId)
+                        // THEN, send the post object to the API using the POST fetch method. (see the PostsRepository module for the add() function declaration)
                         .then(() => PostsRepository.add(post))
+                        // THEN, update the userBooks state variable by calling the syncUserBooks function (see BookRoutes module for function declaration)
                         .then(syncUserBooks)
             })
+            // THEN, send the user back to the "/mybooks" url extension using history.push
             .then(() => { history.push("/mybooks") })
     }
 
@@ -74,6 +95,7 @@ const BookForm = ({ syncUserBooks }) => {
                     required autoFocus
                     placeholder="Title of book..."
                     onChange={(event) => {
+                        // This onChange event is responsible for changing the value of the title property on the book object
                         const bookCopy = { ...book }
                         bookCopy.title = event.target.value
                         updateBook(bookCopy)
@@ -88,6 +110,7 @@ const BookForm = ({ syncUserBooks }) => {
                     required
                     placeholder="Name of author..."
                     onChange={(event) => {
+                        // This onChange event is responsible for changing the value of the author property on the book object
                         const bookCopy = { ...book }
                         bookCopy.author = event.target.value
                         updateBook(bookCopy)
@@ -105,6 +128,7 @@ const BookForm = ({ syncUserBooks }) => {
                     defaultValue="2021"
                     required
                     onChange={(event) => {
+                        // This onChange event is responsible for updating the value of the publicationYear property on the book object
                         const bookCopy = { ...book }
                         bookCopy.publicationYear = event.target.value
                         updateBook(bookCopy)
@@ -119,6 +143,7 @@ const BookForm = ({ syncUserBooks }) => {
                     pattern="https?://.+" title="Include http://"
                     placeholder="https://www..."
                     onChange={(event) => {
+                        // This onChange event is responsible for updating the value of the url property on the book object
                         const bookCopy = { ...book }
                         bookCopy.url = event.target.value
                         updateBook(bookCopy)
@@ -132,41 +157,46 @@ const BookForm = ({ syncUserBooks }) => {
                     type="select"
                     required
                     onChange={(event) => {
+                        // This onChange event is responsible for updating the value of the shelfId property on the userBook object
                         const userBookCopy = { ...userBook }
                         userBookCopy.shelfId = parseInt(event.target.value)
                         updateUserBook(userBookCopy)
 
+                        // It also updates the value of the shelfId property on the post object
                         const postCopy = { ...post }
                         postCopy.shelfId = parseInt(event.target.value)
                         updatePost(postCopy)
                     }}>
                     <option hidden value="">Choose a shelf...</option>
                     {
+                        // Here we are iterating through the shelves array using the .map method and returning an <option> element for each shelf object
                         shelves.map((s) => {
                             return <option key={s.id} value={s.id}>{s.name}</option>
                         })
                     }
                 </Input>
             </FormGroup>
-            <FormGroup className="form__field">
-                {
-                    hasBeenRead
-                        ?
-                        <>
-                            <Label for="dateRead" className="form__label">Date read: </Label>
-                            <Input
-                                className="form__control"
-                                type="date"
-                                id="date"
-                                onChange={(event) => {
-                                    const userBookCopy = { ...userBook }
-                                    userBookCopy.dateRead = event.target.value
-                                    updateUserBook(userBookCopy)
-                                }} />
-                        </>
-                        : ""
-                }
-            </FormGroup>
+            {
+                // IF the value of the shelfId property on the userBook object is equal to 3...
+                hasBeenRead
+                    ?
+                    // THEN, render the following <FormGroup> element
+                    <FormGroup className="form__field">
+                        <Label for="dateRead" className="form__label">Date read: </Label>
+                        <Input
+                            className="form__control"
+                            type="date"
+                            id="date"
+                            onChange={(event) => {
+                                // This onChange event is responsible for updating the value of the dateRead property on the userBook object
+                                const userBookCopy = { ...userBook }
+                                userBookCopy.dateRead = event.target.value
+                                updateUserBook(userBookCopy)
+                            }} />
+                    </FormGroup>
+                    // ELSE (meaning userBook.shelfId is NOT equal to 3), do NOT render the above <FormGroup> element
+                    : ""
+            }
             <Button className="btn submit-book">Submit</Button>
             <Button className="btn cancel-book" onClick={() => { history.push("/mybooks") }}>Cancel</Button>
         </Form>

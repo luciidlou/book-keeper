@@ -6,6 +6,7 @@ import useSimpleAuth from "../hooks/useSimpleAuth"
 import { NavBar } from "./nav/NavBar"
 import "./Bookkeeper.css"
 
+// This function is responsible for rendering the Bookkeeper component. This is the parent component of all the other exisiting components in the components directory.
 export const Bookkeeper = () => {
     const { isAuthenticated } = useSimpleAuth()
     return <>

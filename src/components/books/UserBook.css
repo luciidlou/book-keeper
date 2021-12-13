@@ -1,14 +1,20 @@
 .dateRead {
+    height: 30px;
     width: min-content;
     background-color: #f7f4f1;
 }
 .dateRead:disabled {
+    height: 30px;
     width: min-content;
-    background-color: #e0e0e0;
+    background-color: #f8e9da;
 }
 #notesBtn, #deleteNoteBtn {
     width: 150px;
 }
 .bookRow:nth-child(even) {
     background-color: #c9c7c2;
+}
+.readOptions {
+    background-color: #f7f4f1;
+    height: 30px;
 }

@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom"
 import BookRoutes from "./BookRoutes"
-import SocialRoutes from "./FriendRoutes"
+import SocialRoutes from "./SocialRoutes"
 import Home from "./home/Home"
 
 const ApplicationViews = () => {
