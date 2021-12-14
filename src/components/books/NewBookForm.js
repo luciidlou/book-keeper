@@ -7,23 +7,25 @@ import BooksRepositiory from "../../repositories/BooksRepositiory"
 import PostsRepository from "../../repositories/PostsRepository"
 import ShelvesRepository from "../../repositories/ShelvesRepository"
 import UserBooksRepository from "../../repositories/UserBooksRepository"
-import "./BookForm.css"
+import SearchBar from "../search/SearchBar"
+import "./NewBookForm.css"
 
 // This function is responsible for rendering our BookForm component. It returns a <Form> element (JSX)
-const BookForm = ({ syncUserBooks }) => {
+const NewBookForm = ({ syncUserBooks, showSearchBar, toggleSearchBar }) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const history = useHistory()
     const [shelves, setShelves] = useState([])
+    
 
-    // Here we are declaring our book state variable with the useState() hook and initializing it as an object with 4 key:value pairs 
+    // Here we are declaring the book state variable with the useState() hook and initializing it as an object with 4 key:value pairs 
     const [book, updateBook] = useState({
         title: "",
         author: "",
         publicationYear: "2021",
         url: ""
     })
-    // Here we are declaring our userBook state variable with the useState() hook and initializing it as an object with 5 key:value pairs 
+    // Here we are declaring the userBook state variable with the useState() hook and initializing it as an object with 5 key:value pairs 
     const [userBook, updateUserBook] = useState({
         bookId: 0,
         userId: currentUser.id,
@@ -31,7 +33,7 @@ const BookForm = ({ syncUserBooks }) => {
         dateAdded: "",
         dateRead: ""
     })
-    // Here we are declaring our post state variable with the useState() hook and initializing it as an object with 4 key:value pairs 
+    // Here we are declaring the post state variable with the useState() hook and initializing it as an object with 4 key:value pairs 
     const [post, updatePost] = useState({
         bookId: 0,
         userId: currentUser.id,
@@ -39,8 +41,9 @@ const BookForm = ({ syncUserBooks }) => {
         dateCreated: ""
     })
 
-    // This useEffect is responsible for updating our shelves state variable with the data we FETCH from the API
+    // This useEffect is responsible for updating the shelves state variable with the data we FETCH from the API (only runs once b/c of empty dependency array)
     useEffect(() => {
+        // (see the ShelvesRepository module for the getAll() function declaration)
         ShelvesRepository.getAll().then(setShelves)
     }, [])
 
@@ -59,19 +62,8 @@ const BookForm = ({ syncUserBooks }) => {
                 userBook.dateAdded = currentDate.toLocaleDateString("en-US")
                 post.dateCreated = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a')
                 userBook.bookId = bookResponse.id
-                // IF the shelfId on the userBook object has a value of 3...
-                userBook.shelfId === 3
-                    // THEN, change the value of the dateRead property on the userBook object to the value of the currentDate variable 
-                    // AND send the userBook object to the API using the POST fetch method (see the UserBooksRepository module for the add() function)
-                    ? userBook.dateRead = currentDate.toLocaleDateString("en-US") && UserBooksRepository.add(userBook)
-                        // THEN, capture the response from the fetch call and use it to change the value of the bookId property on the post object
-                        .then((userBookResponse) => post.bookId = userBookResponse.bookId)
-                        // THEN, send the post object to the API using the POST fetch method. (see the PostsRepository module for the add() function declaration)
-                        .then(() => PostsRepository.add(post))
-                        // THEN, update the userBooks state variable by calling the syncUserBooks function (see BookRoutes module for function declaration)
-                        .then(syncUserBooks)
-                    // ELSE (meaning userBook.shelfId is not equal to 3), just send the userBook object (leaves dateRead property as an empty string) to the API using the POST fetch method
-                    : UserBooksRepository.add(userBook)
+                    // This is where we send the userBook object to the API using the POST fetch method (see the UserBooksRepository module for the add() function)
+                    UserBooksRepository.add(userBook)
                         // THEN, capture the response from the fetch call and use it to change the value of the bookId property on the post object
                         .then((userBookResponse) => post.bookId = userBookResponse.bookId)
                         // THEN, send the post object to the API using the POST fetch method. (see the PostsRepository module for the add() function declaration)
@@ -80,10 +72,14 @@ const BookForm = ({ syncUserBooks }) => {
                         .then(syncUserBooks)
             })
             // THEN, send the user back to the "/mybooks" url extension using history.push
-            .then(() => { history.push("/mybooks") })
+            .then(() => history.push("/mybooks"))
     }
 
     return (
+        showSearchBar
+        ?
+        <SearchBar toggleSearchBar={toggleSearchBar} handleSubmit={handleSubmit} />
+        :
         <Form className="form" onSubmit={handleSubmit}>
             <h2 className="form__header">Add a new book to your library!</h2>
             <FormGroup className="form__field">
@@ -95,7 +91,7 @@ const BookForm = ({ syncUserBooks }) => {
                     required autoFocus
                     placeholder="Title of book..."
                     onChange={(event) => {
-                        // This onChange event is responsible for changing the value of the title property on the book object
+                        // This onChange event is responsible for updating the value of the title property on the book object
                         const bookCopy = { ...book }
                         bookCopy.title = event.target.value
                         updateBook(bookCopy)
@@ -110,7 +106,7 @@ const BookForm = ({ syncUserBooks }) => {
                     required
                     placeholder="Name of author..."
                     onChange={(event) => {
-                        // This onChange event is responsible for changing the value of the author property on the book object
+                        // This onChange event is responsible for updating the value of the author property on the book object
                         const bookCopy = { ...book }
                         bookCopy.author = event.target.value
                         updateBook(bookCopy)
@@ -180,10 +176,11 @@ const BookForm = ({ syncUserBooks }) => {
                 // IF the value of the shelfId property on the userBook object is equal to 3...
                 hasBeenRead
                     ?
-                    // THEN, render the following <FormGroup> element
+                    // Render the following <FormGroup> element
                     <FormGroup className="form__field">
                         <Label for="dateRead" className="form__label">Date read: </Label>
                         <Input
+                            required
                             className="form__control"
                             type="date"
                             id="date"
@@ -199,7 +196,8 @@ const BookForm = ({ syncUserBooks }) => {
             }
             <Button className="btn submit-book">Submit</Button>
             <Button className="btn cancel-book" onClick={() => { history.push("/mybooks") }}>Cancel</Button>
-        </Form>
+            <Button className="btn search-book" onClick={() => toggleSearchBar(true)}>Back to search</Button>
+        </Form> 
     )
 }
-export default BookForm
+export default NewBookForm

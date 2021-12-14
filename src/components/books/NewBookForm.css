@@ -18,7 +18,7 @@
     background-color: #f0ede9;
 }
 #pubYear {
-    width: 11em;
+    width: 12em;
     background-color: #f0ede9;
 }
 #url {
@@ -26,13 +26,16 @@
     background-color: #f0ede9;
 }
 #select {
-    width: 11em;
+    width: 12em;
     background-color: #f0ede9;
 }
 #date {
-    width: 11em;
+    width: 12em;
     background-color: #f0ede9;
 }
 .submit-book {
+    margin-right: 20px;
+}
+.cancel-book {
     margin-right: 20px;
 }

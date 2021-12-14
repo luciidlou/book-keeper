@@ -53,7 +53,6 @@ const UserBook = (props) => {
             bookId: props.bookId,
             shelfId: newShelf,
             userId: props.userId,
-            url: props.url,
             dateAdded: props.dateAdded,
             dateRead: props.dateRead
         }
@@ -79,7 +78,6 @@ const UserBook = (props) => {
             bookId: props.bookId,
             shelfId: props.shelf?.id,
             userId: props.userId,
-            url: props.url,
             dateAdded: props.dateAdded,
             dateRead: newDateRead
         }
@@ -160,7 +158,7 @@ const UserBook = (props) => {
             </td>
             <td>
                 <select
-                    value={props.shelf.id}
+                    value={props.shelf?.id}
                     onChange={handleShelfChange}
                     className="readOptions" >
                     {

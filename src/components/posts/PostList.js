@@ -30,7 +30,7 @@ const PostList = () => {
     return (
         <div className="postList">
             {
-                posts.map(post => {
+                posts.slice(0, 8).map(post => {
                     const foundBook = books.find(b => b.id === post.bookId)
                     const foundUser = users.find(u => u.id === post.userId)
                     return <Post
@@ -46,7 +46,6 @@ const PostList = () => {
                         syncPosts={syncPosts}
                     />
                 })
-
             }
         </div>
     )

@@ -1,9 +1,14 @@
 import { Button } from "reactstrap"
 import FollowsRepository from "../../repositories/FollowsRepository"
 import "./Follower.css"
+
+// This function is responsible for rendering our Follower component. It returns a single follow object as a <tr>(table row)</tr> element (JSX)
 const Follower = (props) => {
+    // This function is responsible for deleting a follow object, and THEN updating the follows state located in the FollowersList module... 
     const handleUnfollow = () => {
+        // (see the FollowsRepository module for the delete() function declaration)
         FollowsRepository.delete(props.followId)
+            // (see the FollowersList module for the syncFollowList function declaration)
             .then(props.syncFollowList)
     }
     return (

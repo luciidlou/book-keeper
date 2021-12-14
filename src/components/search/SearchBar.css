@@ -1,0 +1,83 @@
+.search {
+  width: 100vw;
+  height: 100vh;
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.searchInput {
+    margin-top: 20px;
+    display: flex;
+  }
+  
+  .search input {
+    background-color: white;
+    border: 0;
+    border-radius: 2px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-size: 18px;
+    padding: 15px;
+    height: 60px;
+    width: 300px;
+  }
+  
+  .searchIcon {
+    height: 60px;
+    width: 50px;
+    background-color: white;
+    display: grid;
+    place-items: center;
+  }
+  
+  input:focus {
+    outline: none;
+  }
+  .searchIcon svg {
+    font-size: 25px;
+  }
+  
+  .searchResults {
+    margin-top: 5px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  
+  .searchResults::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .searchResults .dataItem {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: black;
+  }
+  
+  .bookItem {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 8px;
+  }
+  .bookItem {
+    text-decoration: none;
+  }
+  
+  .bookItem:hover {
+    background-color: lightgrey;
+    cursor: pointer;
+  }
+  
+  #clearBtn {
+    cursor: pointer;
+  }
+  .exitSearchBtn {
+    margin-top: 15px;
+  }
+  

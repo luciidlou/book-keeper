@@ -3,10 +3,11 @@ import { useHistory } from "react-router-dom"
 import { Button, Table } from "reactstrap"
 import useSimpleAuth from "../../hooks/useSimpleAuth"
 import UserBook from "./UserBook"
+import SortIcon from '@mui/icons-material/Sort';
 import "./UserBookList.css"
 
 // This function is responsible for rendering the UserBookList component. It returns a <Table> element (JSX)
-const UserBookList = ({ syncUserBooks, userBooks }) => {
+const UserBookList = ({ syncUserBooks, userBooks, sorting }) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const history = useHistory()
@@ -39,18 +40,23 @@ const UserBookList = ({ syncUserBooks, userBooks }) => {
                             <tr>
                                 <th>
                                     Title
+                                    <SortIcon id="sortIcon" onClick={() => sorting("title")} style={{ marginLeft: "5px" }} />
                                 </th>
                                 <th>
                                     Author
+                                    <SortIcon id="sortIcon" onClick={() => sorting("author")} style={{ marginLeft: "5px" }} />
                                 </th>
                                 <th>
                                     Shelf
+                                    <SortIcon id="sortIcon" onClick={() => sorting("shelfId")} style={{ marginLeft: "5px" }} />
                                 </th>
                                 <th>
                                     Date added
+                                    <SortIcon id="sortIcon" onClick={() => sorting("dateAdded")} style={{ marginLeft: "5px" }} />
                                 </th>
                                 <th>
                                     Last date read
+                                    <SortIcon id="sortIcon" onClick={() => sorting("dateRead")} style={{ marginLeft: "5px" }} />
                                 </th>
                                 <th>
                                     Add/review notes

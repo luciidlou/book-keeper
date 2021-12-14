@@ -28,14 +28,16 @@ const FollowUsers = (props) => {
         syncFollows()
     }, [props.syncFollowList])
 
-    const isolateFollowedUserIds = () => {
+    const isolateCurrentUsersFollowedUserIds = () => {
         const followIdArr = []
         for (const follow of follows) {
-            followIdArr.push(follow.followedUserId)
+            if (follow.userId === currentUser.id) {
+                followIdArr.push(follow.followedUserId)
+            }
         }
         return followIdArr
     }
-    const arrOfFollowedUserIds = isolateFollowedUserIds()
+    const arrOfCurrentUsersFollowedUserIds = isolateCurrentUsersFollowedUserIds()
 
 
 
@@ -64,7 +66,7 @@ const FollowUsers = (props) => {
                             FollowsRepository.add(newFollow)
                                 .then(props.syncFollowList)
                         }
-                        if (user.id !== currentUser.id && !arrOfFollowedUserIds.includes(user.id)) {
+                        if (user.id !== currentUser.id && !arrOfCurrentUsersFollowedUserIds.includes(user.id)) {
                             return (
                                 <div className="add-friends__list" key={user.id}>
                                     <div className="user-name">
