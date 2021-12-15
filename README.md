@@ -60,6 +60,9 @@ npm start
 ```
 
 ---
+### Demo
+<img src="./book-keeper.gif" alt="">
+
 
 #### ERD
 <img src="./book-keeper.png" alt="">
