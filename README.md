@@ -7,8 +7,10 @@
 ### Table of Contents
 
 - [Description](#description)
-- [How To Use](#how-to-use)
-- [References](#references)
+- [Featues](#features)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [ERD](#erd)
 - [License](#license)
 - [Author Info](#author-info)
 
