@@ -61,7 +61,7 @@ npm start
 
 ---
 ### Demo
-<img src="./book-keeper.gif" alt="">
+<img src="./book-keeper-demo.gif" alt="">
 
 
 #### ERD
