@@ -1,71 +1,97 @@
-# Getting Started with Create React App
+# Bookkeeper
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> A user driven, open-source book repository
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### Table of Contents
 
-### `npm start`
+- [Description](#description)
+- [How To Use](#how-to-use)
+- [References](#references)
+- [License](#license)
+- [Author Info](#author-info)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Description
 
-### `npm test`
+Bookkeeper is a virtual library application for anyone wanting to store and keep track of their books in an organized fashion via the app's "shelves" feature. It also gives the user the ability to share their reading progress with other users that follow them. Reading books is a tremendous activity. Whether you're entertaining yourself, learning something new, or just decompressing after a long day, books are always there when you need them.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I wanted a virtual way to notate, share, and keep track of my books, so I built Bookkeeper. Originally, I put this application together in two weeks, mainly using React's Javascript library. My goals were to gain a better understanding of state and data relationships by incorporating full CRUD functionality, as well as becoming more familiar with the React library, specifically React Hooks and props, all while maintaining a user-friendly experience.
 
-### `npm run build`
+## Features
+- Users can add or remove books to and from their personal library.
+- Users can track their reading progress by organizing their books onto three different shelves.
+- Users can take notes on any of the books in their library.
+- Users can follow other users in order to share their reading progress with one another. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Technologies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- HTML5
+- CSS3
+- Javascript
+- React
+- Git
+- Github
+- JSON Server
+- Visual Studio Code
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Installation
+1. Clone this repository and change to the directory in the terminal.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
+git clone git@github.com:luciidlou/book-keeper.git
+cd book-keeper
+```
+2. Access the data
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. Launch the application
 
-## Learn More
+```sh
+npm install
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### ERD
+<img src="./book-keeper.png" alt="">
+---
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+MIT License
 
-### Analyzing the Bundle Size
+Copyright (c) [2021] [Alex J Lewis]
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-### Making a Progressive Web App
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Author Info
 
-### Deployment
+- Github - [luciidlou](https://github.com/luciidlou)
+- LinkedIn - [Alex Lewis](https://www.linkedin.com/in/alex-lewis22/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# book-keeper
+[Back To The Top](#read-me-template)
