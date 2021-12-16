@@ -51,7 +51,7 @@ cd book-keeper
 ```
 2. Access the data
 
-<a href="https://github.com/luciidlou/book-keeper-api" target="_blank"><img src="https://img.shields.io/badge/-Click%20Here-blue" alt="Bookkeeper API Repository" style="height: 30px !important; width: 100px !important;" /></a>
+<a href="https://github.com/luciidlou/book-keeper-api" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/-Click%20Here-blue" alt="Bookkeeper API Repository" style="height: 30px !important; width: 100px !important;" /></a>
 
 3. Launch the application
 
