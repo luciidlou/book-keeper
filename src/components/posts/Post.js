@@ -3,15 +3,26 @@ import { useState, useEffect } from "react"
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
 import PostsRepository from "../../repositories/PostsRepository"
 import FollowsRepository from "../../repositories/FollowsRepository"
+import LikesRepository from "../../repositories/LikesRepository"
+import blankStar from "../../images/blank-star.png"
+import yellowStar from "../../images/yellow-star.png"
 import "./Post.css"
 
 const Post = (props) => {
     const { getCurrentUser } = useSimpleAuth()
     const currentUser = getCurrentUser()
     const [follows, setFollows] = useState([])
+    const [likes, setLikes] = useState([])
 
+    const syncLikes = () => {
+        LikesRepository.getAll().then(setLikes)
+    }
     useEffect(() => {
         FollowsRepository.getAll().then(setFollows)
+    }, [])
+
+    useEffect(() => {
+        syncLikes()
     }, [])
 
     const handleDynamicText = () => {
@@ -43,6 +54,25 @@ const Post = (props) => {
             .then(props.syncPosts)
     }
 
+
+    const handleLikePost = () => {
+        const newLikeObj = {
+            userId: currentUser.id,
+            postId: props.postId
+        }
+        LikesRepository.add(newLikeObj)
+            .then(props.syncPosts)
+            .then(syncLikes)
+    }
+    const handleDeleteLike = (id) => {
+        LikesRepository.delete(id)
+            .then(props.syncPosts)
+            .then(syncLikes)
+    }
+
+    const postIsLikedByCurrentUser = likes.find(l => l.userId === currentUser.id && l.postId === props.postId)
+    const likesPerPost = likes.filter(l => l.postId === props.postId)
+
     return (
         isFollowed || isCurrentUsersPost
             ?
@@ -60,14 +90,34 @@ const Post = (props) => {
                     <CardText>
                         {props.dateCreated}
                     </CardText>
-                    {
-                        isCurrentUsersPost
-                            ?
-                            <Button onClick={handleDeletePost}>
-                                Delete
-                            </Button>
-                            : ""
-                    }
+                    <div className="likeDeleteContainer">
+                        {
+                            postIsLikedByCurrentUser
+                                ?
+                                <div>
+                                    <img onClick={() => {
+                                        LikesRepository.getLikeByUserAndPost(currentUser.id, props.postId)
+                                            .then(likeObj => {
+                                                handleDeleteLike(likeObj[0].id)
+                                            })
+                                    }} id="starIcon" src={yellowStar} alt="yellow star indicating a liked post" />
+                                    <span>{likesPerPost.length}</span>
+                                </div>
+                                :
+                                <div>
+                                    <img onClick={handleLikePost} id="starIcon" src={blankStar} alt="blank star indicating an unliked post" />
+                                    <span>{likesPerPost.length}</span>
+                                </div>
+                        }
+                        {
+                            isCurrentUsersPost
+                                ?
+                                <Button id="deletePost" onClick={handleDeletePost}>
+                                    Delete
+                                </Button>
+                                : ""
+                        }
+                    </div>
                 </CardBody>
             </Card>
             : ""

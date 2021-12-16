@@ -42,3 +42,14 @@
     color: rgb(255, 255, 255);
     background-color: darkgoldenrod;
 }
+.notificationsIcon {
+    background-color: rgb(218, 192, 80);
+    /* margin-left: 400px; */
+    font-size: 16px;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    padding-bottom: 40px;
+    padding-top: 15px;
+    border-radius: 15px;
+}

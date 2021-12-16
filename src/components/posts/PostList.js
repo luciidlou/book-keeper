@@ -30,7 +30,7 @@ const PostList = () => {
     return (
         <div className="postList">
             {
-                posts.slice(0, 8).map(post => {
+                posts.map(post => {
                     const foundBook = books.find(b => b.id === post.bookId)
                     const foundUser = users.find(u => u.id === post.userId)
                     return <Post
