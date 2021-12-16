@@ -1,4 +1,3 @@
-import moment from "moment"
 import { useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { useState } from "react/cjs/react.development"
@@ -31,8 +30,7 @@ const BookNoteForm = () => {
 
     const handleNoteSumbit = (event) => {
         event.preventDefault()
-        const currentDate = new Date()
-        note.dateAdded = moment(currentDate).format('MMMM Do YYYY, h:mm a')
+        note.dateAdded = Date.now()
         note.userBookId = userBook?.id
         BookNotesRepository.add(note)
             .then(() => { history.push(`/mybooks/${bookId}`) })

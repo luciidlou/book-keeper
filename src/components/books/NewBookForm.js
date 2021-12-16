@@ -1,4 +1,3 @@
-import moment from "moment"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Form, FormGroup, Input, Label } from "reactstrap"
@@ -60,7 +59,7 @@ const NewBookForm = ({ syncUserBooks, showSearchBar, toggleSearchBar }) => {
             .then((bookResponse) => {
                 const currentDate = new Date()
                 userBook.dateAdded = currentDate.toLocaleDateString("en-US")
-                post.dateCreated = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a')
+                post.dateCreated = Date.now()
                 userBook.bookId = bookResponse.id
                     // This is where we send the userBook object to the API using the POST fetch method (see the UserBooksRepository module for the add() function)
                     UserBooksRepository.add(userBook)

@@ -1,4 +1,3 @@
-import moment from "moment"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Input } from "reactstrap"
@@ -42,10 +41,9 @@ const UserBook = (props) => {
     const handleShelfChange = (event) => {
         // The value of newShelf is the primary key of the shelf object that the user selected in the dropdown 
         const newShelf = parseInt(event.target.value)
-        const currentDate = new Date()
 
         post.shelfId = newShelf
-        post.dateCreated = moment(currentDate).format('MMMM Do YYYY, h:mm:ss a')
+        post.dateCreated = Date.now()
 
         // This object is an exact copy of the userBook object being altered in the userBookList component. The only difference is that the shelfId property is being updated
         const editedUserBook = {

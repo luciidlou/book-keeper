@@ -1,3 +1,4 @@
+import moment from "moment"
 import { Button } from "reactstrap"
 import FollowsRepository from "../../repositories/FollowsRepository"
 import "./Follower.css"
@@ -23,7 +24,7 @@ const Follower = (props) => {
                 {props.totalBookCount}
             </td>
             <td>
-                {props.dateFollowed}
+                {moment(props.dateFollowed).format('MMMM Do YYYY')}
             </td>
             <td>
             </td>

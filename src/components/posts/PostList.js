@@ -26,7 +26,6 @@ const PostList = () => {
         UsersRepository.getAll().then(setUsers)
     }, [])
 
-
     return (
         <div className="postList">
             {

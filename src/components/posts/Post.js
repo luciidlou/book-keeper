@@ -7,6 +7,7 @@ import LikesRepository from "../../repositories/LikesRepository"
 import blankStar from "../../images/blank-star.png"
 import yellowStar from "../../images/yellow-star.png"
 import "./Post.css"
+import moment from "moment"
 
 const Post = (props) => {
     const { getCurrentUser } = useSimpleAuth()
@@ -88,7 +89,7 @@ const Post = (props) => {
                         {displayDynamicText} <span style={{ fontWeight: "bold" }}>{props.title}</span> by {props.author}
                     </CardSubtitle>
                     <CardText>
-                        {props.dateCreated}
+                        {moment(props.dateCreated).format('MMMM Do YYYY, h:mm:ss a')}
                     </CardText>
                     <div className="likeDeleteContainer">
                         {

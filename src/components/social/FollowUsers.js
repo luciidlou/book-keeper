@@ -1,4 +1,3 @@
-import moment from "moment"
 import { useEffect, useState } from "react"
 import { Button } from "reactstrap"
 import useSimpleAuth from "../../hooks/useSimpleAuth"
@@ -57,11 +56,10 @@ const FollowUsers = (props) => {
                         const promptToFollowBack = generatePromptToFollowBack()
 
                         const handleFollow = () => {
-                            const currentDate = new Date()
                             const newFollow = {
                                 userId: currentUser.id,
                                 followedUserId: user.id,
-                                dateFollowed: moment(currentDate).format('MMMM Do YYYY')
+                                dateFollowed: Date.now()
                             }
                             FollowsRepository.add(newFollow)
                                 .then(props.syncFollowList)

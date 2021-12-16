@@ -1,3 +1,4 @@
+import moment from "moment"
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap"
 import BookNotesRepository from "../../repositories/BookNotesRepository"
 import "./BookNote.css"
@@ -15,7 +16,7 @@ const BookNote = (props) => {
         <Card className="noteCard">
             <CardBody className="noteCard__body">
                 <CardTitle className="noteCard__title" tag="h5">
-                    {props.dateAdded}
+                    {moment(props.dateAdded).format('MMMM Do YYYY, h:mm a')}
                 </CardTitle>
                 <CardSubtitle
                     className="mb-2 text-muted noteCard__page"
