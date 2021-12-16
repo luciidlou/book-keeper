@@ -66,7 +66,7 @@ npm start
 
 
 #### ERD
-<img src="./book-keeper.png" alt="">
+<img src="./book-keeper-erd.png" alt="">
 ---
 
 ## License
