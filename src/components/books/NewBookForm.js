@@ -57,8 +57,7 @@ const NewBookForm = ({ syncUserBooks, showSearchBar, toggleSearchBar }) => {
         BooksRepositiory.add(book)
             // THEN, capture the response from the fetch call and use it to change the value of the bookId property on the userBook object
             .then((bookResponse) => {
-                const currentDate = new Date()
-                userBook.dateAdded = currentDate.toLocaleDateString("en-US")
+                userBook.dateAdded = Date.now()
                 post.dateCreated = Date.now()
                 userBook.bookId = bookResponse.id
                     // This is where we send the userBook object to the API using the POST fetch method (see the UserBooksRepository module for the add() function)

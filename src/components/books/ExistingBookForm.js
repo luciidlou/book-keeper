@@ -53,8 +53,7 @@ const ExistingBookForm = ({ books, syncBooks, syncUserBooks, toggleSearchBar }) 
     const handleSubmit = (event) => {
         // The preventDefault() method of the Event interface tells the user agent that if the event does not get explicitly handled, its default action should not be taken as it normally would be.
         event.preventDefault()
-        const currentDate = new Date()
-        userBook.dateAdded = currentDate.toLocaleDateString("en-US")
+        userBook.dateAdded = Date.now()
         post.dateCreated = Date.now()
         userBook.bookId = parseInt(bookId)
         // This is where we send the userBook object to the API using the POST fetch method (see the UserBooksRepository module for the add() function)

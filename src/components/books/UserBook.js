@@ -1,3 +1,4 @@
+import moment from "moment"
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Input } from "reactstrap"
@@ -29,7 +30,7 @@ const UserBook = (props) => {
     useEffect(() => {
         syncShelves()
     }, [])
-    
+
     // This function is responsible for deleting a userBook object, and THEN updating the userBooks state located in the BookRoutes module...
     const handleRemoveBook = () => {
         // This is where the DELETE fetch call is executed on the specified userBook object. (See the userBooksRepository module to understand the delete function)
@@ -167,7 +168,7 @@ const UserBook = (props) => {
                 </select>
             </td>
             <td>
-                {props.dateAdded}
+                {moment(props.dateAdded).format('MMMM Do YYYY')}
             </td>
             <td>
                 {displayDateRead}
