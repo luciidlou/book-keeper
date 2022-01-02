@@ -31,3 +31,15 @@
 .likeDeleteContainer span {
     margin-left: 5px;
 }
+.showUsersThatLiked {
+    position: relative;
+    margin-left: 100px;
+}
+.numberOfPostLikes {
+    padding: 2px 5px;
+}
+.numberOfPostLikes:hover {
+    color: blue;
+    cursor: pointer;
+    background-color: darkgoldenrod;
+}

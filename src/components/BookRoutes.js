@@ -16,8 +16,8 @@ const BookRoutes = () => {
     const [showSearchBar, toggleSearchBar] = useState(true)
 
 
-    // This function is responsible for updating the userBooks state variable 
     const syncUserBooks = () => {
+    // This function is responsible for updating the userBooks state variable 
         // (see the UserBooksRepository module for the getAll() function declaration)
         UserBooksRepository.getAll().then(setUserBooks)
     }

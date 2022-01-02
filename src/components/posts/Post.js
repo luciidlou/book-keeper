@@ -14,6 +14,7 @@ const Post = (props) => {
     const currentUser = getCurrentUser()
     const [follows, setFollows] = useState([])
     const [likes, setLikes] = useState([])
+    const [isShown, setIsShown] = useState(false)
 
     const syncLikes = () => {
         LikesRepository.getAll().then(setLikes)
@@ -77,50 +78,70 @@ const Post = (props) => {
     return (
         isFollowed || isCurrentUsersPost
             ?
-            <Card className="postCard">
-                <CardBody className="postCard__body">
-                    <CardTitle className="postCard__title">
-                        <span className="user-name">{props.firstName} {props.lastName}</span>
-                    </CardTitle>
-                    <CardSubtitle
-                        className="mb-2 text-muted postCard__date"
-                        tag="h6"
-                    >
-                        {displayDynamicText} <span style={{ fontWeight: "bold" }}>{props.title}</span> by {props.author}
-                    </CardSubtitle>
-                    <CardText>
-                        {moment(props.dateCreated).format('MMMM Do YYYY, h:mm:ss a')}
-                    </CardText>
-                    <div className="likeDeleteContainer">
-                        {
-                            postIsLikedByCurrentUser
-                                ?
-                                <div>
-                                    <img onClick={() => {
-                                        LikesRepository.getLikeByUserAndPost(currentUser.id, props.postId)
-                                            .then(likeObj => {
-                                                handleDeleteLike(likeObj[0].id)
-                                            })
-                                    }} id="starIcon" src={yellowStar} alt="yellow star indicating a liked post" />
-                                    <span>{likesPerPost.length}</span>
-                                </div>
-                                :
-                                <div>
-                                    <img onClick={handleLikePost} id="starIcon" src={blankStar} alt="blank star indicating an unliked post" />
-                                    <span>{likesPerPost.length}</span>
-                                </div>
-                        }
-                        {
-                            isCurrentUsersPost
-                                ?
-                                <Button id="deletePost" onClick={handleDeletePost}>
-                                    Delete
-                                </Button>
-                                : ""
-                        }
-                    </div>
-                </CardBody>
-            </Card>
+            <>
+                <Card className="postCard">
+                    <CardBody className="postCard__body">
+                        <CardTitle className="postCard__title">
+                            <span className="user-name">{props.firstName} {props.lastName}</span>
+                        </CardTitle>
+                        <CardSubtitle
+                            className="mb-2 text-muted postCard__date"
+                            tag="h6"
+                        >
+                            {displayDynamicText} <span style={{ fontWeight: "bold" }}>{props.title}</span> by {props.author}
+                        </CardSubtitle>
+                        <CardText>
+                            {moment(props.dateCreated).format('MMMM Do YYYY, h:mm:ss a')}
+                        </CardText>
+                        <div className="likeDeleteContainer">
+                            {
+                                postIsLikedByCurrentUser
+                                    ?
+                                    <div>
+                                        <img onClick={() => {
+                                            LikesRepository.getLikeByUserAndPost(currentUser.id, props.postId)
+                                                .then(likeObj => {
+                                                    handleDeleteLike(likeObj[0].id)
+                                                })
+                                        }}
+                                            onMouseEnter={() => setIsShown(true)}
+                                            onMouseLeave={() => setIsShown(false)}
+                                            id="starIcon" src={yellowStar} alt="yellow star indicating a liked post" />
+                                        <span className="numberOfPostLikes">{likesPerPost.length}</span>
+                                    </div>
+                                    :
+                                    <div>
+                                        <img onClick={handleLikePost}
+                                            onMouseEnter={() => setIsShown(true)}
+                                            onMouseLeave={() => setIsShown(false)}
+                                            id="starIcon" src={blankStar} alt="blank star indicating an unliked post" />
+                                        <span className="numberOfPostLikes">{likesPerPost.length}</span>
+                                    </div>
+                            }
+                            {
+                                isCurrentUsersPost
+                                    ?
+                                    <Button id="deletePost" onClick={handleDeletePost}>
+                                        Delete
+                                    </Button>
+                                    : ""
+                            }
+                        </div>
+                    </CardBody>
+
+                </Card>
+                {
+                    isShown && (
+                        <div className="showUsersThatLiked">
+                            {
+                                likesPerPost.map(likeObj => {
+                                    return <div key={likeObj.id}>{likeObj.user?.firstName} {likeObj.user?.lastName} liked this post!</div>
+                                })
+                            }
+                        </div>
+                    )
+                }
+            </>
             : ""
     )
 }
