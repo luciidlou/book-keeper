@@ -30,7 +30,7 @@ const BookRoutes = () => {
 
 
     const sorting = (col) => {
-        if (col === "shelfId") {
+        if (col === "shelfId" || col === "rating") {
             if (order === "asc") {
                 const sorted = [...userBooks].sort((a, b) => {
                     return a[col] - b[col]

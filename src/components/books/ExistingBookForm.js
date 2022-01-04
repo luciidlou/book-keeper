@@ -5,6 +5,8 @@ import useSimpleAuth from "../../hooks/useSimpleAuth"
 import PostsRepository from "../../repositories/PostsRepository"
 import ShelvesRepository from "../../repositories/ShelvesRepository"
 import UserBooksRepository from "../../repositories/UserBooksRepository"
+import blankStar from "../../images/blank-star.png"
+import yellowStar from "../../images/yellow-star.png"
 import "./NewBookForm.css"
 
 // This function is responsible for rendering our BookForm component. It returns a <Form> element (JSX)
@@ -13,6 +15,7 @@ const ExistingBookForm = ({ books, syncBooks, syncUserBooks, toggleSearchBar }) 
     const currentUser = getCurrentUser()
     const history = useHistory()
     const [shelves, setShelves] = useState([])
+    const [mouseHasEntered, setMouseHasEntered] = useState(0)
     const { bookId } = useParams()
 
     // Here we are declaring the userBook state variable with the useState() hook and initializing it as an object with 5 key:value pairs 
@@ -21,7 +24,8 @@ const ExistingBookForm = ({ books, syncBooks, syncUserBooks, toggleSearchBar }) 
         userId: currentUser.id,
         shelfId: 0,
         dateAdded: "",
-        dateRead: ""
+        dateRead: "",
+        rating: 0
     })
     // Here we are declaring the post state variable with the useState() hook and initializing it as an object with 4 key:value pairs 
     const [post, updatePost] = useState({
@@ -67,6 +71,261 @@ const ExistingBookForm = ({ books, syncBooks, syncUserBooks, toggleSearchBar }) 
             // THEN, send the user back to the "/mybooks" url extension using history.push
             .then(() => history.push("/mybooks"))
     }
+    const handleRateBook = (rating) => {
+        const copy = {...userBook}
+        copy.rating = rating
+        updateUserBook(copy)
+        setMouseHasEntered(0)
+    }
+
+    const generateFiveStars = () => {
+        if (mouseHasEntered === 0) {
+            return (
+                <>
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                </>
+            )
+        }
+        else if (mouseHasEntered === 1) {
+            return (
+                <>
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(1)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                </>
+            )
+        }
+        else if (mouseHasEntered === 2) {
+            return (
+                <>
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(2)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                </>
+            )
+        }
+        else if (mouseHasEntered === 3) {
+            return (
+                <>
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(3)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                </>
+            )
+        }
+        else if (mouseHasEntered === 4) {
+            return (
+                <>
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(4)} />
+                    <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                </>
+            )
+        }
+        else if (mouseHasEntered === 5) {
+            return (
+                <>
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(5)} />
+                </>
+            )
+        }
+    }
+    const displayFiveStars = generateFiveStars()
+
+    const generateStarRating = () => {
+        if (userBook.rating === 1) {
+            if (mouseHasEntered === 0) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 2) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(2)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 3) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(3)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 4) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(4)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 5) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(5)} />
+                    </>
+                )
+            }
+        }
+        else if (userBook.rating === 2) {
+            if (mouseHasEntered === 0) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onClick={() => handleRateBook(1)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 3) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(3)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 4) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(4)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 5) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(5)} />
+                    </>
+                )
+            }
+        }
+        else if (userBook.rating === 3) {
+            if (mouseHasEntered === 0) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onClick={() => handleRateBook(1)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" onClick={() => handleRateBook(2)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 4) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(4)} />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 5) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(4)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(5)} />
+                    </>
+                )
+            }
+        }
+        else if (userBook.rating === 4) {
+            if (mouseHasEntered === 0) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onClick={() => handleRateBook(1)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" onClick={() => handleRateBook(2)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" onClick={() => handleRateBook(3)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" />
+                        <img src={blankStar} alt="blank star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} />
+                    </>
+                )
+            }
+            else if (mouseHasEntered === 5) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(1)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(2)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(3)} onMouseLeave={() => setMouseHasEntered(0)} />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" />
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onMouseEnter={() => setMouseHasEntered(5)} onMouseLeave={() => setMouseHasEntered(0)} onClick={() => handleRateBook(5)} />
+                    </>
+                )
+            }
+        }
+        else if (userBook.rating === 5) {
+            if (mouseHasEntered === 0) {
+                return (
+                    <>
+                        <img src={yellowStar} alt="yellow star" id="blankRateStars" onClick={() => handleRateBook(1)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" onClick={() => handleRateBook(2)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" onClick={() => handleRateBook(3)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" onClick={() => handleRateBook(4)} />
+                        <img src={yellowStar} alt="blank star" id="blankRateStars" />
+                    </>
+                )
+            }
+        }
+    }
+    const displayStarRating = generateStarRating()
 
     return (
         <Form className="form" onSubmit={handleSubmit}>
@@ -119,20 +378,32 @@ const ExistingBookForm = ({ books, syncBooks, syncUserBooks, toggleSearchBar }) 
                 hasBeenRead
                     ?
                     // Render the following <FormGroup> element
-                    <FormGroup className="form__field">
-                        <Label for="dateRead" className="form__label">Date read: </Label>
-                        <Input
-                            required
-                            className="form__control"
-                            type="date"
-                            id="date"
-                            onChange={(event) => {
-                                // This onChange event is responsible for updating the value of the dateRead property on the userBook object
-                                const userBookCopy = { ...userBook }
-                                userBookCopy.dateRead = event.target.value
-                                updateUserBook(userBookCopy)
-                            }} />
-                    </FormGroup>
+                    <>
+                        <FormGroup className="form__field">
+                            <Label for="dateRead" className="form__label">Date read: </Label>
+                            <Input
+                                required
+                                className="form__control"
+                                type="date"
+                                id="date"
+                                onChange={(event) => {
+                                    // This onChange event is responsible for updating the value of the dateRead property on the userBook object
+                                    const userBookCopy = { ...userBook }
+                                    userBookCopy.dateRead = event.target.value
+                                    updateUserBook(userBookCopy)
+                                }} />
+                        </FormGroup>
+                        <FormGroup>
+                        <Label for="rating" className="form__label">Rating: </Label>
+                            {
+                                userBook.rating === 0
+                                    ?
+                                    displayFiveStars
+                                    :
+                                    displayStarRating
+                            }
+                        </FormGroup>
+                    </>
                     // ELSE (meaning userBook.shelfId is NOT equal to 3), do NOT render the above <FormGroup> element
                     : ""
             }
