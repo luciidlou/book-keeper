@@ -59,6 +59,10 @@ const UserBookList = ({ syncUserBooks, userBooks, sorting }) => {
                                     <SortIcon id="sortIcon" onClick={() => sorting("dateRead")} style={{ marginLeft: "5px" }} />
                                 </th>
                                 <th>
+                                    Rating
+                                    <SortIcon id="sortIcon" onClick={() => sorting("rating")} style={{ marginLeft: "5px" }} />
+                                </th>
+                                <th>
                                     Add/review notes
                                 </th>
                                 <th>
@@ -83,6 +87,7 @@ const UserBookList = ({ syncUserBooks, userBooks, sorting }) => {
                                             shelf={userBook.shelf}
                                             dateAdded={userBook.dateAdded}
                                             dateRead={userBook.dateRead}
+                                            rating={userBook.rating}
                                             bookId={userBook.bookId}
                                             syncUserBooks={syncUserBooks} />
                                     )
