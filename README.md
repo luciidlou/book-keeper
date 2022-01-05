@@ -62,11 +62,11 @@ npm start
 
 ---
 ### Demo
-<img src="./book-keeper-demo.gif" alt="">
+<img src="bookeeper-demo-final.gif" alt="">
 
 
 #### ERD
-<img src="./book-keeper-erd.png" alt="">
+<img src="./bookkeeper-final-erd.png" alt="">
 ---
 
 ## License
