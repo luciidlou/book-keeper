@@ -24,7 +24,7 @@ I wanted a virtual way to notate, share, and keep track of my books, so I built 
 
 ## Features
 - Users can add or remove books to and from their personal library.
-- Users can track their reading progress by organizing their books onto three different shelves.
+- Users can track their reading progress by organizing their books onto three different shelves, and rating them on a five-star scale.
 - Users can take notes on any of the books in their library.
 - Users can follow other users in order to share their reading progress with one another. 
 
